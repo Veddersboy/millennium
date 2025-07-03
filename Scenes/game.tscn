@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3k0rv3hjcoun"]
+
+[ext_resource type="PackedScene" uid="uid://cxvqx074c4blw" path="res://Scenes/player.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://ck16kuy2akhfv" path="res://Scenes/tm1.tscn" id="1_qxrlw"]
+
+[node name="Game" type="Node2D"]
+
+[node name="tm1" parent="." instance=ExtResource("1_qxrlw")]
+position = Vector2(515, 361)
+
+[node name="player" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(564, 315)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(2, 2)

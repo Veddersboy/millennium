@@ -1,2 +1,2 @@
-# millennium
-game for real
+# Millennium
+game
