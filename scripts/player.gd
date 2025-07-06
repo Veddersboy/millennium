@@ -39,7 +39,7 @@ func _physics_process(delta):
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y *= jump_cut_multiplier
 	
-	move_and_slide()
+	
 	
 	if direction.x != 0:
 		lastDirection.x = direction.x
@@ -57,6 +57,7 @@ func _physics_process(delta):
 	else:
 		state = player_state.IDLE
 	
+	move_and_slide()
 	play_walk_animation()
 
 func play_walk_animation():
