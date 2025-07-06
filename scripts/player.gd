@@ -17,8 +17,10 @@ var state = player_state.IDLE
 var playerState = "idle"
 
 func _physics_process(delta):
-	var direction = Input.get_vector("move_left", "move_right", "", "")
-	var direction_up_and_down = Input.get_vector("jump", "crouch", "", "")
+	var direction := Vector2(0,0)
+	
+	direction.x = Input.get_axis("move_left", "move_right")
+	direction.y = Input.get_axis("jump", "crouch")
 	
 	if is_on_floor():
 		if Input.is_action_pressed("crouch"):
@@ -55,9 +57,9 @@ func _physics_process(delta):
 	else:
 		state = player_state.IDLE
 	
-	play_walk_animation(direction, direction_up_and_down)
+	play_walk_animation()
 
-func play_walk_animation(direction: Vector2, vertical_input: Vector2):
+func play_walk_animation():
 	$AnimatedSprite2D.flip_h = lastDirection.x < 0
 	
 	if Input.is_action_just_pressed("attack"):
