@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck16kuy2akhfv"]
+[gd_scene load_steps=4 format=4 uid="uid://br48fwcvkktha"]
 
-[ext_resource type="Texture2D" uid="uid://djpvv213x76lt" path="res://assets/Tiles/tileset.png" id="1_x6eiu"]
+[ext_resource type="Texture2D" uid="uid://djpvv213x76lt" path="res://assets/Tiles/tileset.png" id="1_4mdk0"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t1m62"]
-texture = ExtResource("1_x6eiu")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_844pu"]
+texture = ExtResource("1_4mdk0")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -119,13 +119,12 @@ texture = ExtResource("1_x6eiu")
 5:5/0 = 0
 5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_fc8q3"]
+[sub_resource type="TileSet" id="TileSet_srm3m"]
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 2
-sources/0 = SubResource("TileSetAtlasSource_t1m62")
+sources/0 = SubResource("TileSetAtlasSource_844pu")
 
-[node name="TileMap" type="TileMap"]
-position = Vector2(630, 273)
-tile_set = SubResource("TileSet_fc8q3")
-format = 2
-layer_0/tile_data = PackedInt32Array(-131076, 0, 0, -131075, 65536, 0, -131074, 65536, 0, -131073, 65536, 0, -196608, 65536, 0, -196607, 65536, 0, -196606, 65536, 0, -196605, 65536, 0, -196604, 65536, 0, -196603, 65536, 0, -196602, 65536, 0, -196601, 65536, 0, -196600, 65536, 0, -196599, 65536, 0, -196598, 65536, 0, -196597, 131072, 0, -393208, 393216, 3, -393207, 458752, 3, -393206, 524288, 3, -327683, 393216, 3, -327682, 458752, 3, -327681, 524288, 3, -589823, 393216, 3, -589822, 458752, 3, -589821, 458752, 3, -589820, 458752, 3, -589819, 458752, 3, -589818, 524288, 3)
+[node name="TileMapLayer1" type="TileMapLayer"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD8//3/AAAAAAAAAAD9//3/AAABAAAAAAD+//3/AAABAAAAAAD///3/AAABAAAAAAAAAP3/AAABAAAAAAABAP3/AAABAAAAAAACAP3/AAABAAAAAAADAP3/AAABAAAAAAAEAP3/AAABAAAAAAAFAP3/AAABAAAAAAAGAP3/AAABAAAAAAAHAP3/AAABAAAAAAAIAP3/AAABAAAAAAAJAP3/AAABAAAAAAAKAP3/AAABAAAAAAALAP3/AAACAAAAAAAIAPr/AAAGAAMAAAAJAPr/AAAHAAMAAAAKAPr/AAAIAAMAAAD9//r/AAAGAAMAAAD+//r/AAAHAAMAAAD///r/AAAIAAMAAAABAPf/AAAGAAMAAAACAPf/AAAHAAMAAAADAPf/AAAHAAMAAAAEAPf/AAAHAAMAAAAFAPf/AAAHAAMAAAAGAPf/AAAIAAMAAAANAPr/AAAHAAMAAAAOAPr/AAAHAAMAAAAPAPr/AAAHAAMAAAAQAPr/AAAHAAMAAAARAPr/AAAHAAMAAAASAPr/AAAHAAMAAAATAPr/AAAHAAMAAAAWAPf/AAAHAAMAAAAXAPf/AAAHAAMAAAAYAPf/AAAHAAMAAAAZAPf/AAAHAAMAAAAaAPf/AAAHAAMAAAA=")
+tile_set = SubResource("TileSet_srm3m")
