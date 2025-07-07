@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3k0rv3hjcoun"]
+[gd_scene load_steps=3 format=4 uid="uid://c3k0rv3hjcoun"]
 
 [ext_resource type="PackedScene" uid="uid://cxvqx074c4blw" path="res://Scenes/player.tscn" id="1_ebmjs"]
-[ext_resource type="PackedScene" uid="uid://ck16kuy2akhfv" path="res://Scenes/tm1.tscn" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://br48fwcvkktha" path="res://Scenes/tile_map_layer_1.tscn" id="2_qxrlw"]
 
 [node name="Game" type="Node2D"]
 
-[node name="tm1" parent="." instance=ExtResource("1_qxrlw")]
-position = Vector2(515, 361)
-layer_0/tile_data = PackedInt32Array(-131076, 0, 0, -131075, 65536, 0, -131074, 65536, 0, -131073, 65536, 0, -196608, 65536, 0, -196607, 65536, 0, -196606, 65536, 0, -196605, 65536, 0, -196604, 65536, 0, -196603, 65536, 0, -196602, 65536, 0, -196601, 65536, 0, -196600, 65536, 0, -196599, 65536, 0, -196598, 65536, 0, -196597, 131072, 0, -393208, 393216, 3, -393207, 458752, 3, -393206, 524288, 3, -327683, 393216, 3, -327682, 458752, 3, -327681, 524288, 3, -589823, 393216, 3, -589822, 458752, 3, -589821, 458752, 3, -589820, 458752, 3, -589819, 458752, 3, -589818, 524288, 3, -393203, 458752, 3, -393202, 458752, 3, -393201, 458752, 3, -393200, 458752, 3, -393199, 458752, 3, -393198, 458752, 3, -393197, 458752, 3, -589802, 458752, 3, -589801, 458752, 3, -589800, 458752, 3, -589799, 458752, 3, -589798, 458752, 3)
-
 [node name="player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(564, 315)
+z_index = 5
+position = Vector2(46, -65)
 collision_layer = 2
 collision_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(2, 2)
+
+[node name="TileMapLayer1" parent="." instance=ExtResource("2_qxrlw")]
+tile_map_data = PackedByteArray("AADx////AAAGAAMAAADy////AAABAAAAAADz////AAABAAAAAAD0////AAABAAAAAAD1////AAABAAAAAAD2////AAABAAAAAAD3////AAABAAAAAAD4////AAABAAAAAAD5////AAABAAAAAAD6////AAABAAAAAAD7////AAABAAAAAAD8////AAABAAAAAAD9////AAABAAAAAAD+////AAABAAAAAAD/////AAABAAAAAAAAAP//AAABAAAAAAABAP//AAABAAAAAAACAP//AAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAGAP//AAAFAAIAAAAHAP//AAADAAIAAAAIAP//AAABAAAAAAAJAP//AAABAAAAAAAKAP//AAACAAAAAAALAPn/AAAAAAAAAAAMAPn/AAABAAAAAAANAPn/AAABAAAAAAAOAPn/AAABAAAAAAAPAPn/AAABAAAAAAAQAPn/AAABAAAAAAARAPn/AAACAAAAAAD5//v/AAAGAAMAAAD6//v/AAABAAAAAAD7//v/AAABAAAAAAD8//v/AAABAAAAAADy//f/AAAGAAMAAADz//f/AAABAAAAAAD0//f/AAABAAAAAAD1//f/AAABAAAAAAAGAPz/AAAAAAAAAAAHAPz/AAACAAAAAAAGAP3/AAAAAAEAAAAGAP7/AAAAAAEAAAAHAP7/AAACAAEAAAAHAP3/AAACAAEAAAALAPr/AAAAAAIAAAAMAPr/AAABAAIAAAANAPr/AAABAAIAAAAOAPr/AAABAAIAAAAPAPr/AAABAAIAAAAQAPr/AAABAAIAAAARAPr/AAACAAIAAAA=")
