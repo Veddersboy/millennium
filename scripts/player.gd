@@ -15,6 +15,7 @@ enum player_state{ IDLE, RUN, JUMP, FALL, CROUCH}
 var state = player_state.IDLE
 
 var playerState = "idle"
+var has_double_jump : bool = true
 
 func _physics_process(delta):
 	var direction := Vector2(0,0)
@@ -23,6 +24,7 @@ func _physics_process(delta):
 	direction.y = Input.get_axis("jump", "crouch")
 	
 	if is_on_floor():
+		has_double_jump = true
 		if Input.is_action_pressed("crouch"):
 			velocity.x = crouch_velocity
 		else:
@@ -31,15 +33,17 @@ func _physics_process(delta):
 		velocity.x = direction.x * maxSpeed
 	
 	if not is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			attempt_double_jump()
 		velocity.y += GRAVITY * delta
-	elif Input.is_action_just_pressed("jump"):
-		velocity.y = jump_velocity
+	else: 
+		if Input.is_action_just_pressed("jump"):
+			velocity.y = jump_velocity
+		
 	
 	# Small jump
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y *= jump_cut_multiplier
-	
-	
 	
 	if direction.x != 0:
 		lastDirection.x = direction.x
@@ -59,6 +63,11 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	play_walk_animation()
+
+func attempt_double_jump():
+	if has_double_jump:
+		velocity.y = jump_velocity
+		has_double_jump = false
 
 func play_walk_animation():
 	$AnimatedSprite2D.flip_h = lastDirection.x < 0
