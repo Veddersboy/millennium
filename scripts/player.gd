@@ -106,7 +106,7 @@ func dash(direction):
 				dash_direction.y = vertical_input * dash_speed
 			else: 
 				dash_direction.x = lastDirection.x * dash_speed
-			dash_direction.x = 0
+				dash_direction.y = 0
 		print("DASHING" + "directionUsed: " + str(direction.x) + ", " + str(direction.y))
 		print("  " + "direction Found" + str(Input.get_axis("move_left", "move_right")) + ", " + str(Input.get_axis("jump", "crouch")))
 		
