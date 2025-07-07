@@ -13,15 +13,32 @@ var lastDirection := Vector2(1, 0)
 
 enum player_state{ IDLE, RUN, JUMP, FALL, CROUCH}
 var state = player_state.IDLE
-
 var playerState = "idle"
+
 var has_double_jump : bool = true
+
+var has_dash : bool = true
+var dashing : bool = false
+var dash_speed : float = 400.0
+var dash_direction := Vector2(1,0)
 
 func _physics_process(delta):
 	var direction := Vector2(0,0)
 	
 	direction.x = Input.get_axis("move_left", "move_right")
 	direction.y = Input.get_axis("jump", "crouch")
+	
+	if direction.x != 0:
+		lastDirection.x = direction.x
+	
+	if Input.is_action_just_pressed("dash"):
+		attempt_dash(direction)
+	
+	if dashing:
+		velocity = dash_direction
+		move_and_slide()
+		play_walk_animation()
+		return
 	
 	if is_on_floor():
 		has_double_jump = true
@@ -39,14 +56,10 @@ func _physics_process(delta):
 	else: 
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
-		
 	
 	# Small jump
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y *= jump_cut_multiplier
-	
-	if direction.x != 0:
-		lastDirection.x = direction.x
 	
 	# Jump, Crouch, and run physics.
 	if not is_on_floor():
@@ -68,6 +81,32 @@ func attempt_double_jump():
 	if has_double_jump:
 		velocity.y = jump_velocity
 		has_double_jump = false
+
+func attempt_dash(direction):
+	if has_dash:
+		dashing = true
+		has_dash = false
+		$DashTime.start()
+		$DashCD.start()
+		var vertical_input = Input.get_axis("look-up", "crouch")
+		if direction.x != 0:
+			dash_direction.x = direction.x * dash_speed
+			dash_direction.y =  vertical_input * dash_speed
+			dash_direction.normalized()
+		else:
+			if vertical_input != 0:
+				dash_direction.y = vertical_input * dash_speed
+			else: 
+				dash_direction.x = lastDirection.x * dash_speed
+			dash_direction.x = 0
+		print("DASHING" + "directionUsed: " + str(direction.x) + ", " + str(direction.y))
+		print("  " + "direction Found" + str(Input.get_axis("move_left", "move_right")) + ", " + str(Input.get_axis("jump", "crouch")))
+		
+func _on_dash_time_timeout() -> void:
+	dashing = false
+
+func _on_dash_cd_timeout() -> void:
+	has_dash = true
 
 func play_walk_animation():
 	$AnimatedSprite2D.flip_h = lastDirection.x < 0
