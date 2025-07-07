@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cxvqx074c4blw"]
+[gd_scene load_steps=42 format=3 uid="uid://cxvqx074c4blw"]
 
 [ext_resource type="Script" uid="uid://dvr8yaagdrsut" path="res://scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cab5p060dqatg" path="res://assets/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_v0iea"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c8dqyfs5kdh36" path="res://assets/herochar sprites(new)/herochar_before_or_after_jump_srip_2.png" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://bvli6j8ssrpkn" path="res://assets/herochar sprites(new)/herochar_jump_up_anim_strip_3.png" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://cwc8c1b6ndut0" path="res://assets/herochar sprites(new)/herochar_jump_down_anim_strip_3.png" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://b41oro1k00r0" path="res://assets/herochar sprites(new)/herochar_spritesheet(new).png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://cfh4o2qair8e1" path="res://assets/herochar sprites(new)/herochar_run_anim_strip_6.png" id="4_fkybt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
@@ -47,6 +48,18 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
 atlas = ExtResource("3_fkybt")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypfnu"]
+atlas = ExtResource("4_8erm5")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuaoq"]
+atlas = ExtResource("4_8erm5")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wohnl"]
+atlas = ExtResource("4_8erm5")
+region = Rect2(32, 112, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
 atlas = ExtResource("3_x3wgy")
@@ -168,6 +181,20 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_ypfnu")
+}, {
+"duration": 0.9,
+"texture": SubResource("AtlasTexture_xuaoq")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_wohnl")
+}],
+"loop": true,
+"name": &"dashing",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fs7ks")
 }, {
@@ -258,8 +285,8 @@ script = ExtResource("1_cvnsp")
 position = Vector2(0, -16)
 scale = Vector2(2.0625, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
-animation = &"idle_right"
-frame_progress = 0.00187162
+animation = &"dashing"
+frame_progress = 0.613752
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)
