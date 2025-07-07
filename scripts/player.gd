@@ -9,6 +9,8 @@ var jump_while_crouch = .2
 var crouch_velocity = 0
 
 var maxSpeed = 100 * 1.5
+var acceleration = 1800
+var friction = 2000
 var lastDirection := Vector2(1, 0)
 
 enum player_state{ IDLE, RUN, JUMP, FALL, CROUCH}
@@ -31,7 +33,10 @@ func _physics_process(delta):
 	direction.y = Input.get_axis("jump", "crouch")
 	
 	if direction.x != 0:
+		velocity.x = move_toward(velocity.x, direction.x * maxSpeed, acceleration * delta)
 		lastDirection.x = direction.x
+	else:
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 	
 	if !has_dash:
 		if!dash_on_CD && is_on_floor():
@@ -48,13 +53,8 @@ func _physics_process(delta):
 		
 	if is_on_floor():
 		has_double_jump = true
-		
 		if Input.is_action_pressed("crouch"):
 			velocity.x = crouch_velocity
-		else:
-			velocity.x = direction.x * maxSpeed
-	else:
-		velocity.x = direction.x * maxSpeed
 	
 	if not is_on_floor():
 		if Input.is_action_just_pressed("jump"):
