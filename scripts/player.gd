@@ -11,10 +11,8 @@ var crouch_velocity = 0
 var maxSpeed = 100 * 1.5
 var lastDirection := Vector2(1, 0)
 
-enum player_state{ IDLE, RUN, JUMP, FALL, CROUCH}
+enum player_state{ IDLE, RUN, JUMP, FALL, CROUCH, ATTACK }
 var state = player_state.IDLE
-
-var playerState = "idle"
 
 func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "", "")
@@ -55,16 +53,17 @@ func _physics_process(delta):
 	else:
 		state = player_state.IDLE
 	
+	if Input.is_action_just_pressed("attack"):
+		state = player_state.ATTACK
+	
 	play_walk_animation(direction, direction_up_and_down)
 
 func play_walk_animation(direction: Vector2, vertical_input: Vector2):
 	$AnimatedSprite2D.flip_h = lastDirection.x < 0
 	
-	if Input.is_action_just_pressed("attack"):
-		$AnimatedSprite2D.play("base_attack")
-		return
-	
 	match state:
+		player_state.ATTACK:
+			$AnimatedSprite2D.play("base_attack")
 		player_state.IDLE:
 			$AnimatedSprite2D.play("idle_right")
 		player_state.RUN:

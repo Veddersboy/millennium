@@ -123,16 +123,16 @@ region = Rect2(80, 0, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3wgy"]
 animations = [{
 "frames": [{
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wpjfl")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bi64h")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2ijsl")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_p1odr")
 }],
 "loop": true,
@@ -258,7 +258,7 @@ position = Vector2(0, -16)
 scale = Vector2(2.0625, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"base_attack"
-frame_progress = 0.326956
+frame_progress = 0.894006
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
