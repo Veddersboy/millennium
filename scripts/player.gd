@@ -21,6 +21,8 @@ var has_dash : bool = true
 var dashing : bool = false
 var dash_speed : float = 400.0
 var dash_direction := Vector2(1,0)
+var dash_on_CD : bool = false
+
 
 func _physics_process(delta):
 	var direction := Vector2(0,0)
@@ -31,17 +33,22 @@ func _physics_process(delta):
 	if direction.x != 0:
 		lastDirection.x = direction.x
 	
-	if Input.is_action_just_pressed("dash"):
-		attempt_dash(direction)
+	if !has_dash:
+		if!dash_on_CD && is_on_floor():
+			has_dash = true
+	
+	if Input.is_action_just_pressed("dash") && has_dash:
+		dash(direction)
 	
 	if dashing:
 		velocity = dash_direction
 		move_and_slide()
 		play_walk_animation()
 		return
-	
+		
 	if is_on_floor():
 		has_double_jump = true
+		
 		if Input.is_action_pressed("crouch"):
 			velocity.x = crouch_velocity
 		else:
@@ -82,11 +89,12 @@ func attempt_double_jump():
 		velocity.y = jump_velocity
 		has_double_jump = false
 
-func attempt_dash(direction):
-	if has_dash:
+func dash(direction):
 		dashing = true
 		has_dash = false
+		dash_on_CD = true
 		$DashTime.start()
+		$AnimatedSprite2D.play("dashing")
 		$DashCD.start()
 		var vertical_input = Input.get_axis("look-up", "crouch")
 		if direction.x != 0:
@@ -106,7 +114,7 @@ func _on_dash_time_timeout() -> void:
 	dashing = false
 
 func _on_dash_cd_timeout() -> void:
-	has_dash = true
+	dash_on_CD = false
 
 func play_walk_animation():
 	$AnimatedSprite2D.flip_h = lastDirection.x < 0
