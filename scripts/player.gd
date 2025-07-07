@@ -100,7 +100,7 @@ func dash(direction):
 		if direction.x != 0:
 			dash_direction.x = direction.x * dash_speed
 			dash_direction.y =  vertical_input * dash_speed
-			dash_direction.normalized()
+			dash_direction = dash_direction.normalized() * dash_speed
 		else:
 			if vertical_input != 0:
 				dash_direction.y = vertical_input * dash_speed
