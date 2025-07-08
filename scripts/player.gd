@@ -13,7 +13,6 @@ var lastDirection := Vector2(1, 0)
 
 enum player_state{ IDLE, RUN, JUMP, FALL, CROUCH}
 var state = player_state.IDLE
-var playerState = "idle"
 
 var has_double_jump : bool = true
 
@@ -100,13 +99,15 @@ func dash(direction):
 		if direction.x != 0:
 			dash_direction.x = direction.x * dash_speed
 			dash_direction.y =  vertical_input * dash_speed
-			dash_direction.normalized()
 		else:
 			if vertical_input != 0:
 				dash_direction.y = vertical_input * dash_speed
 			else: 
 				dash_direction.x = lastDirection.x * dash_speed
 			dash_direction.x = 0
+			
+		dash_direction = dash_direction.normalized() * dash_speed
+		
 		print("DASHING" + "directionUsed: " + str(direction.x) + ", " + str(direction.y))
 		print("  " + "direction Found" + str(Input.get_axis("move_left", "move_right")) + ", " + str(Input.get_axis("jump", "crouch")))
 		
