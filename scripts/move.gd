@@ -19,15 +19,16 @@ func process_physics(delta):
 		parent.state_machine.change_state(parent.fall_state)
 		return
 	
-
+	parent.animations.flip_v = false
 	#Velocity application if state remains
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir == 0:
 		if abs(parent.velocity.x) < minSpeed:
-			print("Calling Idle")
 			parent.state_machine.change_state(parent.idle_state)
 			return
 		parent.velocity.x = move_toward(parent.velocity.x, 0, friction * delta)
 	else:
+		if((input_dir == 1.0) == parent.animations.flip_h):
+			parent.animations.flip_h = !parent.animations.flip_h
 		parent.velocity.x = move_toward(parent.velocity.x, input_dir * maxSpeed, acceleration * delta)
 	parent.move_and_slide()
