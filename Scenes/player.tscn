@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cwc8c1b6ndut0" path="res://assets/herochar sprites(new)/herochar_jump_down_anim_strip_3.png" id="3_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://b41oro1k00r0" path="res://assets/herochar sprites(new)/herochar_spritesheet(new).png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://cfh4o2qair8e1" path="res://assets/herochar sprites(new)/herochar_run_anim_strip_6.png" id="4_fkybt"]
-[ext_resource type="Script" uid="uid://mj6xshix23yj" path="res://Scripts/state_machine.gd" id="9_f1ek2"]
-[ext_resource type="Script" uid="uid://dx3ckph7813wr" path="res://Scripts/idle.gd" id="10_gymyn"]
-[ext_resource type="Script" uid="uid://bkag8835202qb" path="res://Scripts/move.gd" id="11_pu2lt"]
-[ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://Scripts/jump.gd" id="11_ukyrk"]
-[ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://Scripts/fall.gd" id="13_ukyrk"]
+[ext_resource type="Script" uid="uid://mj6xshix23yj" path="res://scripts/state_machine.gd" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://dx3ckph7813wr" path="res://scripts/idle.gd" id="10_gymyn"]
+[ext_resource type="Script" uid="uid://bkag8835202qb" path="res://scripts/move.gd" id="11_pu2lt"]
+[ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/jump.gd" id="11_ukyrk"]
+[ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/fall.gd" id="13_ukyrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
 atlas = ExtResource("2_3smsa")
@@ -227,7 +227,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_fkybt")
 }],
 "loop": true,
-"name": &"idle_right",
+"name": &"idle",
 "speed": 8.0
 }, {
 "frames": [{
@@ -290,8 +290,7 @@ script = ExtResource("1_cvnsp")
 position = Vector2(0, -16)
 scale = Vector2(2.0625, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
-animation = &"dashing"
-frame_progress = 0.613752
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)
@@ -308,8 +307,11 @@ wait_time = 0.8
 script = ExtResource("9_f1ek2")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine"]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("Fall", "Jump", "Move")]
 script = ExtResource("10_gymyn")
+Fall = NodePath("../fall")
+Jump = NodePath("../jump")
+Move = NodePath("../move")
 
 [node name="jump" type="Node" parent="state_machine"]
 script = ExtResource("11_ukyrk")

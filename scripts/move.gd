@@ -13,6 +13,5 @@ func process_physics(delta):
 	if input_dir == 0:
 		parent.state_machine.change_state(parent.idle_state)
 		return
-
 	parent.velocity.x = move_toward(parent.velocity.x, input_dir * parent.maxSpeed, parent.acceleration * delta)
 	parent.move_and_slide()

@@ -25,10 +25,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 func _physics_process(delta: float) -> void:
-	var input_dir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-
-	move_and_slide()
-
+	# var input_dir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
