@@ -17,12 +17,12 @@ func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		print("JUMP")
 		return jump_state
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+	if Input.get_axis("move_left","move_right") != 0:
 		return move_state
 	return null
 
 func process_physics(delta) -> State:
-	parent.velocity.y += parent.GRAVITY * delta #var access like this is bad
+	parent.velocity.y += parent.gravity * delta #var access like this is bad
 	
 	if !parent.is_on_floor():
 		return fall_state

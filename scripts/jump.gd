@@ -13,7 +13,7 @@ func process_physics(delta) -> State:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	parent.velocity.x = move_toward(parent.velocity.x, input_dir * parent.maxSpeed, parent.acceleration * delta)
 	
-	parent.velocity.y += parent.GRAVITY * delta
+	parent.velocity.y += parent.gravity * delta
 	
 	parent.move_and_slide()
 	

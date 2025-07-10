@@ -11,11 +11,18 @@ var state_machine = $state_machine
 @onready var jump_state = $state_machine/jump
 @onready var fall_state = $state_machine/fall
 
-var lastDirection := Vector2.RIGHT
-var GRAVITY = 1000.0
+# var lastDirection := Vector2.RIGHT
+@export
+var gravity = 1000.0
+@export
 var jump_velocity = -400.0
+@export
 var maxSpeed = 150.0
+@export
+var minSpeed = 0.005
+@export
 var acceleration = 1800.0
+@export
 var friction = 2000.0
 
 func _ready() -> void:
@@ -26,7 +33,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# var input_dir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
