@@ -307,25 +307,20 @@ wait_time = 0.8
 script = ExtResource("9_f1ek2")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "jump_state", "move_state")]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("Fall", "Jump", "Move")]
 script = ExtResource("10_gymyn")
-fall_state = NodePath("../fall")
-jump_state = NodePath("../jump")
-move_state = NodePath("../move")
+Fall = NodePath("../fall")
+Jump = NodePath("../jump")
+Move = NodePath("../move")
 
-[node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state")]
+[node name="jump" type="Node" parent="state_machine"]
 script = ExtResource("11_ukyrk")
-fall_state = NodePath("../fall")
 
-[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "jump_state", "idle_state")]
+[node name="move" type="Node" parent="state_machine"]
 script = ExtResource("11_pu2lt")
-fall_state = NodePath("../fall")
-jump_state = NodePath("../jump")
-idle_state = NodePath("../idle")
 
-[node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state")]
+[node name="fall" type="Node" parent="state_machine"]
 script = ExtResource("13_ukyrk")
-idle_state = NodePath("../idle")
 
 [connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]

@@ -2,6 +2,13 @@ extends State
 class_name Move
 
 @export
+var fall_state : State
+@export 
+var jump_state : State
+@export
+var idle_state : State
+
+@export
 var maxSpeed = 150
 @export
 var minSpeed = 0.005
@@ -11,29 +18,30 @@ var acceleration = 1800
 var friction = 2000
 
 func enter():
+	super()
 	parent.animations.play("move_right")
-	
-func process_input (event: InputEvent):
+
+func process_input (event: InputEvent) -> State:
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		print("JUMP")
-		parent.state_machine.change_state(parent.jump_state)
+		return jump_state
+	return null
 
-func process_physics(delta):
+func process_physics(delta) -> State:
 	#State Switches
 	if !parent.is_on_floor():
-		parent.state_machine.change_state(parent.fall_state)
-		return
+		return fall_state
 	
 	parent.animations.flip_v = false
 	#Velocity application if state remains
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir == 0:
 		if abs(parent.velocity.x) < minSpeed:
-			parent.state_machine.change_state(parent.idle_state)
-			return
+			return idle_state
 		parent.velocity.x = move_toward(parent.velocity.x, 0, friction * delta)
 	else:
 		if((input_dir == 1.0) == parent.animations.flip_h):
 			parent.animations.flip_h = !parent.animations.flip_h
 		parent.velocity.x = move_toward(parent.velocity.x, input_dir * maxSpeed, acceleration * delta)
 	parent.move_and_slide()
+	return null

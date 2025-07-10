@@ -17,10 +17,17 @@ func change_state(new_state: State):
 	current_state.enter()
 
 func process_input(event: InputEvent):
-	current_state.process_input(event)
+	var new_state = current_state.process_input(event)
+	if new_state:
+		change_state(new_state)
 
 func process_physics(delta: float):
-	current_state.process_physics(delta)
+	pass
+	var new_state = current_state.process_physics(delta)
+	if new_state:
+		change_state(new_state)
 
 func process_frame(delta: float):
-	current_state.process_frame(delta)
+	var new_state = current_state.process_frame(delta)
+	if new_state:
+		change_state(new_state)
