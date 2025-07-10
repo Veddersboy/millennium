@@ -12,6 +12,11 @@ var friction = 2000
 
 func enter():
 	parent.animations.play("move_right")
+	
+func process_input (event: InputEvent):
+	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+		print("JUMP")
+		parent.state_machine.change_state(parent.jump_state)
 
 func process_physics(delta):
 	#State Switches

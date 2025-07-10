@@ -10,7 +10,6 @@ var Move : State
 
 func enter():
 	parent.animations.play("idle")
-	parent.velocity.x = 0
 	#parent.velocity.x = 0 #Consider using move_toward here to gradually slow player
 
 func process_input(event: InputEvent) -> State:
