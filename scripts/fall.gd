@@ -1,20 +1,13 @@
 extends State
 class_name Fall
 
-@export
-var idle_state: State
-@export
-var move_state: State
-@export
-var dash_state : State
-
 func enter():
 	super()
 	parent.animations.play("fall")
 	
 func process_input (input: Node) -> State:
 	if Input.is_action_just_pressed("dash"):
-		return dash_state
+		return parent.dash_state
 	return null
 
 func process_physics(delta) -> State:
@@ -24,9 +17,9 @@ func process_physics(delta) -> State:
 	
 	if parent.is_on_floor():
 		if input.direction.x != 0 && abs(parent.velocity.x) < parent.minSpeed:
-			return idle_state
+			return parent.idle_state
 		else:
-			return move_state
+			return parent.move_state
 	
 	parent.move_and_slide()
 	return null

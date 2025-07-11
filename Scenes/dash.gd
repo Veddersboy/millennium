@@ -1,13 +1,6 @@
 extends State
 class_name dash
 
-@export
-var idle_state: State
-@export
-var move_state: State
-@export
-var fall_state: State
-
 var dash_time: float = 0
 
 func enter():
@@ -24,6 +17,6 @@ func enter():
 func process_physics(delta) -> State:
 	dash_time += delta
 	if dash_time > parent.dash_length:
-		return idle_state #Consider making a function to decide transition state within state manager or something
+		return parent.idle_state #Consider making a function to decide transition state within state manager or something
 	parent.move_and_slide()
 	return null

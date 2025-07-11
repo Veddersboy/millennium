@@ -1,11 +1,6 @@
 extends State
 class_name Jump
 
-@export
-var fall_state : State
-@export
-var dash_state : State
-
 func enter():
 	super()
 	parent.velocity.y = parent.jump_velocity
@@ -13,7 +8,7 @@ func enter():
 	
 func process_input (input: Node) -> State:
 	if Input.is_action_just_pressed("dash"):
-		return dash_state
+		return parent.dash_state
 	return null
 
 func process_physics(delta) -> State:
@@ -25,5 +20,5 @@ func process_physics(delta) -> State:
 	parent.move_and_slide()
 	
 	if parent.velocity.y > 0:
-		return fall_state
+		return parent.fall_state
 	return null

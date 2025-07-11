@@ -12,6 +12,7 @@ var input = $input_manager
 @onready var move_state = $state_machine/move
 @onready var jump_state = $state_machine/jump
 @onready var fall_state = $state_machine/fall
+@onready var dash_state = $state_machine/dash
 
 # var lastDirection := Vector2.RIGHT
 @export
