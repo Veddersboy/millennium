@@ -15,8 +15,8 @@ func enter():
 	parent.animations.play("idle")
 	#parent.velocity.x = 0 #Consider using move_toward here to gradually slow player
 
-func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
+func process_input(input: Node) -> State:
+	if input.jump_pressed and parent.is_on_floor():
 		return jump_state
 	if Input.get_axis("move_left","move_right") != 0:
 		return move_state

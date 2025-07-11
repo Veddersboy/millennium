@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cxvqx074c4blw"]
+[gd_scene load_steps=49 format=3 uid="uid://cxvqx074c4blw"]
 
 [ext_resource type="Script" uid="uid://dvr8yaagdrsut" path="res://scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cab5p060dqatg" path="res://assets/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_v0iea"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b41oro1k00r0" path="res://assets/herochar sprites(new)/herochar_spritesheet(new).png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://cfh4o2qair8e1" path="res://assets/herochar sprites(new)/herochar_run_anim_strip_6.png" id="4_fkybt"]
 [ext_resource type="Script" uid="uid://mj6xshix23yj" path="res://scripts/state_machine.gd" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://bmjowmndjtf1l" path="res://Scenes/input_manager.gd" id="9_h4iuc"]
 [ext_resource type="Script" uid="uid://dx3ckph7813wr" path="res://scripts/idle.gd" id="10_gymyn"]
 [ext_resource type="Script" uid="uid://bkag8835202qb" path="res://scripts/move.gd" id="11_pu2lt"]
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/jump.gd" id="11_ukyrk"]
@@ -303,6 +304,9 @@ one_shot = true
 
 [node name="DashCD" type="Timer" parent="."]
 wait_time = 0.8
+
+[node name="input_manager" type="Node" parent="."]
+script = ExtResource("9_h4iuc")
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("9_f1ek2")

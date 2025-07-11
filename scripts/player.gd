@@ -5,6 +5,8 @@ extends CharacterBody2D
 var animations : AnimatedSprite2D = $AnimatedSprite2D
 @onready 
 var state_machine = $state_machine
+@onready
+var input = $input_manager
 
 @onready var idle_state = $state_machine/idle
 @onready var move_state = $state_machine/move
@@ -38,11 +40,12 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)
+	pass #Handled by input_manager
 
 func _physics_process(delta: float) -> void:
-	# var input_dir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	state_machine.process_input(input)
 	state_machine.process_physics(delta)
+	input.reset()
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)

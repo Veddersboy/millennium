@@ -8,6 +8,7 @@ func init(p: Player):
 	for child in get_children():
 		if child is State:
 			child.parent = p
+			child.input = p.input
 	change_state(starting_state)
 
 func change_state(new_state: State):
@@ -16,8 +17,8 @@ func change_state(new_state: State):
 	current_state = new_state
 	current_state.enter()
 
-func process_input(event: InputEvent):
-	var new_state = current_state.process_input(event)
+func process_input(input: Node):
+	var new_state = current_state.process_input(input)
 	if new_state:
 		change_state(new_state)
 
