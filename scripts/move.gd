@@ -7,6 +7,8 @@ var fall_state : State
 var jump_state : State
 @export
 var idle_state : State
+@export
+var dash_state : State
 
 func enter():
 	super()
@@ -14,8 +16,9 @@ func enter():
 
 func process_input (event: InputEvent) -> State:
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
-		print("JUMP")
 		return jump_state
+	if Input.is_action_just_pressed("dash"):
+		return dash_state
 	return null
 
 func process_physics(delta) -> State:
@@ -31,8 +34,7 @@ func process_physics(delta) -> State:
 			return idle_state
 		parent.velocity.x = move_toward(parent.velocity.x, 0, parent.friction * delta)
 	else:
-		if((input_dir == 1.0) == parent.animations.flip_h):
-			parent.animations.flip_h = !parent.animations.flip_h
+		parent.animations.flip_h = input_dir == -1 if input_dir != 0 else parent.animations.flip_h
 		parent.velocity.x = move_toward(parent.velocity.x, input_dir * parent.maxSpeed, parent.acceleration * delta)
 	parent.move_and_slide()
 	return null

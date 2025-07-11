@@ -24,6 +24,15 @@ var minSpeed = 0.005
 var acceleration = 1800.0
 @export
 var friction = 2000.0
+@export
+var dash_speed : float = 400.0
+@export
+var dash_length : float = 0.2
+@export
+var dash_CD : float = 0.8
+@export
+var has_dash : bool = false
+
 
 func _ready() -> void:
 	state_machine.init(self)

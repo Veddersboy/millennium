@@ -7,6 +7,8 @@ var fall_state : State
 var jump_state : State
 @export
 var move_state : State
+@export
+var dash_state : State
 
 func enter():
 	super()
@@ -15,10 +17,11 @@ func enter():
 
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
-		print("JUMP")
 		return jump_state
 	if Input.get_axis("move_left","move_right") != 0:
 		return move_state
+	if Input.is_action_just_pressed("dash"):
+		return dash_state
 	return null
 
 func process_physics(delta) -> State:
