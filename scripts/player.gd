@@ -34,7 +34,7 @@ var dash_speed : float = 400.0
 @export
 var dash_length : float = 0.2
 @export
-var dash_CD : float = 0.8
+var dash_CD : float = 0.2
 @export
 var dash_CD_counter : float = 0.0
 @export
@@ -48,13 +48,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass #Handled by input_manager
 
 func _physics_process(delta: float) -> void:
-	dash_check(delta)
+	
 	state_machine.process_input(input)
 	state_machine.process_physics(delta)
 	input.reset()
-	print(velocity.x)
 
 func _process(delta: float) -> void:
+	dash_check(delta)
 	state_machine.process_frame(delta)
 
 func dash_check(delta):

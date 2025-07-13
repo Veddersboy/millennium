@@ -11,12 +11,11 @@ func process_input(input: Node) -> State:
 		return parent.jump_state
 	if input.direction.x != 0:
 		return parent.move_state
-	if Input.is_action_just_pressed("dash") && parent.has_dash:
+	if input.dash_pressed && parent.has_dash:
 		return parent.dash_state
 	return null
 
 func process_physics(delta) -> State:
-	print(parent.velocity.x)
 	parent.velocity.y += parent.gravity * delta
 	
 	if !parent.is_on_floor():

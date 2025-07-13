@@ -3,11 +3,10 @@ class_name Fall
 
 func enter():
 	super()
-	print(parent.air_friction)
 	parent.animations.play("fall")
 	
 func process_input (input: Node) -> State:
-	if Input.is_action_just_pressed("dash") && parent.has_dash:
+	if input.dash_pressed && parent.has_dash:
 		return parent.dash_state
 	return null
 
