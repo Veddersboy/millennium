@@ -48,13 +48,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass #Handled by input_manager
 
 func _physics_process(delta: float) -> void:
-	
+	dash_check(delta)
 	state_machine.process_input(input)
 	state_machine.process_physics(delta)
 	input.reset()
 
 func _process(delta: float) -> void:
-	dash_check(delta)
+	
 	state_machine.process_frame(delta)
 
 func dash_check(delta):
