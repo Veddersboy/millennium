@@ -9,13 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://b41oro1k00r0" path="res://assets/herochar sprites(new)/herochar_spritesheet(new).png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://cfh4o2qair8e1" path="res://assets/herochar sprites(new)/herochar_run_anim_strip_6.png" id="4_fkybt"]
 [ext_resource type="Script" uid="uid://mj6xshix23yj" path="res://scripts/state_machine.gd" id="9_f1ek2"]
-[ext_resource type="Script" uid="uid://bmjowmndjtf1l" path="res://Scenes/input_manager.gd" id="9_h4iuc"]
+[ext_resource type="Script" uid="uid://bmjowmndjtf1l" path="res://scripts/input_manager.gd" id="9_h4iuc"]
 [ext_resource type="Script" uid="uid://dx3ckph7813wr" path="res://scripts/idle.gd" id="10_gymyn"]
 [ext_resource type="Script" uid="uid://bkag8835202qb" path="res://scripts/move.gd" id="11_pu2lt"]
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/jump.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/fall.gd" id="13_ukyrk"]
-[ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://Scenes/dash.gd" id="14_7dp3o"]
-[ext_resource type="Script" uid="uid://bm4faluiopa16" path="res://Scenes/attack.gd" id="16_fd4e3"]
+[ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://scripts/dash.gd" id="14_7dp3o"]
+[ext_resource type="Script" uid="uid://bm4faluiopa16" path="res://scripts/attack.gd" id="16_fd4e3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
 atlas = ExtResource("2_3smsa")
