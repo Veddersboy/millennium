@@ -7,7 +7,7 @@ func enter():
 	parent.animations.play("jump")
 	
 func process_input (input: Node) -> State:
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && parent.has_dash:
 		return parent.dash_state
 	return null
 

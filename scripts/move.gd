@@ -8,7 +8,7 @@ func enter():
 func process_input (input: Node) -> State:
 	if input.jump_pressed and parent.is_on_floor():
 		return parent.jump_state
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && parent.has_dash:
 		return parent.dash_state
 	return null
 

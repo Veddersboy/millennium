@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cxvqx074c4blw"]
+[gd_scene load_steps=50 format=3 uid="uid://cxvqx074c4blw"]
 
 [ext_resource type="Script" uid="uid://dvr8yaagdrsut" path="res://scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cab5p060dqatg" path="res://assets/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_v0iea"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/jump.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/fall.gd" id="13_ukyrk"]
 [ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://Scenes/dash.gd" id="14_7dp3o"]
+[ext_resource type="Script" uid="uid://bm4faluiopa16" path="res://Scenes/attack.gd" id="16_fd4e3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
 atlas = ExtResource("2_3smsa")
@@ -292,7 +293,7 @@ script = ExtResource("1_cvnsp")
 position = Vector2(0, -16)
 scale = Vector2(2.0625, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
-animation = &"idle"
+animation = &"base_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)
@@ -326,6 +327,9 @@ script = ExtResource("13_ukyrk")
 
 [node name="dash" type="Node" parent="state_machine"]
 script = ExtResource("14_7dp3o")
+
+[node name="attack" type="Node" parent="state_machine"]
+script = ExtResource("16_fd4e3")
 
 [connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]

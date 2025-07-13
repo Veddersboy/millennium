@@ -14,7 +14,7 @@ func _unhandled_input(event: InputEvent):
 		jump_released = true
 
 func _process(_delta):
-	direction = Input.get_vector("move_left","move_right","look-up","crouch")
+	direction.x = Input.get_axis("move_left","move_right")
 
 func reset():
 	jump_pressed = false

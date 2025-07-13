@@ -26,7 +26,9 @@ var minSpeed = 0.005
 @export
 var acceleration = 1800.0
 @export
-var friction = 2000.0
+var air_friction = 1000.0
+@export
+var friction = 1800.0
 @export
 var dash_speed : float = 400.0
 @export
@@ -34,7 +36,9 @@ var dash_length : float = 0.2
 @export
 var dash_CD : float = 0.8
 @export
-var has_dash : bool = false
+var dash_CD_counter : float = 0.0
+@export
+var has_dash : bool = true
 
 
 func _ready() -> void:
@@ -44,12 +48,25 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass #Handled by input_manager
 
 func _physics_process(delta: float) -> void:
+	dash_check(delta)
 	state_machine.process_input(input)
 	state_machine.process_physics(delta)
 	input.reset()
+	print(velocity.x)
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+
+func dash_check(delta):
+	if has_dash:
+		return
+	if dash_CD_counter < dash_CD:
+		dash_CD_counter += delta
+		return
+	if is_on_floor():
+		has_dash = true
+		dash_CD_counter = 0
+	return
 
 #var GRAVITY = 1000.0
 #
