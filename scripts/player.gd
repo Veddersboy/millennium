@@ -40,7 +40,6 @@ var dash_CD_counter : float = 0.0
 @export
 var has_dash : bool = true
 
-
 func _ready() -> void:
 	state_machine.init(self)
 
@@ -54,7 +53,6 @@ func _physics_process(delta: float) -> void:
 	input.reset()
 
 func _process(delta: float) -> void:
-	
 	state_machine.process_frame(delta)
 
 func dash_check(delta):
