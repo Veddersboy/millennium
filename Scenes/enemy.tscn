@@ -174,9 +174,7 @@ collision_mask = 2
 script = ExtResource("1_t1ujs")
 gravity = null
 maxSpeed = null
-minSpeed = null
 acceleration = null
-friction = null
 player_chase = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

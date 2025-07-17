@@ -8,8 +8,6 @@ var attack_pressed := false
 
 var direction := Vector2.ZERO
 
-
-
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("jump"):
 		jump_pressed = true
