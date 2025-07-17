@@ -22,6 +22,7 @@ func _unhandled_input(event: InputEvent):
 
 func _process(_delta):
 	direction.x = Input.get_axis("move_left","move_right")
+	direction.y = Input.get_axis("look-up","crouch")
 
 func reset():
 	jump_pressed = false

@@ -20,6 +20,8 @@ var gravity = 1000.0
 @export
 var jump_velocity = -400.0
 @export
+var jump_cut_multiplier = .5
+@export
 var maxSpeed = 150.0
 @export
 var minSpeed = 0.005

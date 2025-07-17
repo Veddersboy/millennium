@@ -17,6 +17,10 @@ func process_physics(delta) -> State:
 	
 	parent.velocity.y += parent.gravity * delta
 	
+	## Small jump
+	if input.jump_released:
+		parent.velocity.y *= parent.jump_cut_multiplier
+
 	parent.move_and_slide()
 	
 	if parent.velocity.y > 0:
