@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdy227pgpd8pn"]
+
+[ext_resource type="Script" uid="uid://b0qj6gy8j4c8a" path="res://debug_overlay.gd" id="1_yalef"]
+[ext_resource type="Script" uid="uid://foc277bs65ca" path="res://scripts/debug_drawer.gd" id="2_gftnv"]
+
+[node name="DebugOverlay" type="CanvasLayer"]
+script = ExtResource("1_yalef")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 196.0
+offset_bottom = 203.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 28.0
+text = "Debug Info Placeholder
+var 1 = XXX
+var 2 = XXXX.XX
+var 3 = true
+var 4 = false
+var 6 = \"String\"
+var 7 = [a,b,c,d,e]"
+autowrap_mode = 3
+
+[node name="DebugDrawer" type="Node2D" parent="."]
+script = ExtResource("2_gftnv")
