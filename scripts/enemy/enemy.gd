@@ -8,6 +8,8 @@ class_name Enemy
 @onready var move_state : MoveEnemy = $state_machine_enemy/move
 @onready var fall_state : FallEnemy = $state_machine_enemy/fall
 
+@onready var health_component: EnemyHealthComponent = $EnemyHealthComponent
+
 @export var gravity : float = 1000.0
 @export var maxSpeed : float = 100.0
 @export var acceleration : float = 1800.0
@@ -15,7 +17,15 @@ class_name Enemy
 @export var player : Node2D = null
 
 func _ready() -> void:
+	add_to_group("enemies")
 	state_machine.init(self)
+	health_component.died.connect(_on_death)
+	health_component.health_changed.connect(_on_health_changed)
+	
+	if has_node("AttackArea"):
+		var attack_area = get_node("AttackArea")
+		attack_area.add_to_group("enemy_attacks")
+		attack_area.set_meta("damage", 1.0) # Example damage value
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
@@ -31,3 +41,16 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body == player:
 		player = null
 		player_chase = false
+
+func _on_health_changed(current_health: float, max_health: float):
+	print("Enemy health:", current_health, "/", max_health)
+
+func _on_death():
+	print("Enemy died!")
+
+	set_physics_process(false)
+	queue_free()
+	
+func apply_damage(amount: float) -> void:
+	health_component.take_damage(amount)
+	print("Enemy took ", amount, " damage!")

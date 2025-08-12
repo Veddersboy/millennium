@@ -14,6 +14,13 @@ var input = $input_manager
 @onready var fall_state = $state_machine/fall
 @onready var dash_state = $state_machine/dash
 
+@onready var attack_state = $state_machine/attack
+@onready var hurt_state = $state_machine/hurt
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var attack_area: Area2D = $AttackArea
+@onready var hurtbox: Area2D = $Hurtbox
+
+
 # var lastDirection := Vector2.RIGHT
 @export
 var gravity = 1000.0
@@ -40,8 +47,21 @@ var dash_CD_counter : float = 0.0
 @export
 var has_dash : bool = true
 
+signal player_died
+signal health_changed(current_hearts: float, max_hearts: int)
+
 func _ready() -> void:
 	state_machine.init(self)
+	
+	add_to_group("player")
+	
+	if health_component:
+		health_component.health_depleted.connect(_on_health_depleted)
+		health_component.took_damage.connect(_on_took_damage)
+		health_component.health_changed.connect(_on_health_changed)
+	
+	if hurtbox:
+		hurtbox.area_entered.connect(_on_hurtbox_area_entered)
 
 func _unhandled_input(event: InputEvent) -> void:
 	pass #Handled by input_manager
@@ -65,6 +85,35 @@ func dash_check(delta):
 		has_dash = true
 		dash_CD_counter = 0
 	return
+	
+# Can add a death state later on with everything below
+func _on_health_depleted():
+	"""Called when player's health reaches 0"""
+	player_died.emit()
+	print("Player died!")
+
+func _on_took_damage(damage: float):
+	"""Called when player takes damage"""
+	print("Player took ", damage, " hearts of damage!")
+	
+	# Transition to hurt state if not already there
+	if state_machine.current_state != hurt_state:
+		state_machine.change_state(hurt_state)
+
+func _on_health_changed(current_hearts: float, max_hearts: int):
+	"""Called when player's health changes - forward to UI"""
+	health_changed.emit(current_hearts, max_hearts)
+
+func _on_hurtbox_area_entered(area):
+	"""Called when something enters player's hurtbox"""
+	if area.is_in_group("enemy_attacks"):
+		var damage = area.get_meta("damage", 0.5)
+		var took_damage = health_component.take_damage(damage)
+		if took_damage:
+			print("Player took ", damage, " damage from enemy attack")
+		var knockback_dir = (global_position - area.global_position).normalized()
+		if state_machine.current_state == hurt_state:
+			hurt_state.set_knockback_direction(knockback_dir)
 
 #var GRAVITY = 1000.0
 #

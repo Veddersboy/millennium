@@ -18,6 +18,8 @@ func process_physics(delta) -> State:
 	dash_time += delta
 	if dash_time > parent.dash_length:
 		return parent.idle_state #Consider making a function to decide transition state within state manager or something
+	if input.attack_pressed:
+		return parent.attack_state
 	parent.move_and_slide()
 	return null
 

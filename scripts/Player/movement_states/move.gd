@@ -10,6 +10,8 @@ func process_input (input: Node) -> State:
 		return parent.jump_state
 	if input.dash_pressed && parent.has_dash:
 		return parent.dash_state
+	if input.attack_pressed:
+		return parent.attack_state
 	return null
 
 func process_physics(delta) -> State:
