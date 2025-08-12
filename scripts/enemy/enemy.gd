@@ -22,8 +22,12 @@ func _ready() -> void:
 	health_component.died.connect(_on_death)
 	health_component.health_changed.connect(_on_health_changed)
 	
-	if has_node("AttackArea"):
-		var attack_area = get_node("AttackArea")
+	if has_node("Hurtbox"):
+		var hurtbox_area = get_node("Hurtbox")
+		hurtbox_area.add_to_group("enemy_hurtbox")
+	
+	if has_node("DamageArea"):
+		var attack_area = get_node("DamageArea")
 		attack_area.add_to_group("enemy_attacks")
 		attack_area.set_meta("damage", 1.0) # Example damage value
 

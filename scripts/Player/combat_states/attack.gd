@@ -65,6 +65,7 @@ func _on_attack_area_entered(area):
 	if has_attacked:
 		return
 
+	
 	if area.is_in_group("enemies") or area.is_in_group("enemy_hurtbox"):
 		var enemy_node = area
 		if area.is_in_group("enemy_hurtbox"):

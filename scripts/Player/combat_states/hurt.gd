@@ -1,8 +1,8 @@
 extends State
 class_name hurt
 
-@export var hurt_duration: float = 0.6
-@export var knockback_force: float = 150.0
+@export var hurt_duration: float = .25
+@export var knockback_force: float = 250.0
 
 var hurt_timer: float = 0.0
 var knockback_direction: Vector2 = Vector2.ZERO
@@ -48,7 +48,7 @@ func process_physics(delta) -> State:
 	
 	if knockback_direction != Vector2.ZERO:
 		parent.velocity.x = knockback_direction.x * knockback_force
-		knockback_force = max(0, knockback_force - 400 * delta)
+		# knockback_force = max(0, knockback_force - 400 * delta)
 	
 	parent.velocity.y += parent.gravity * delta
 	parent.move_and_slide()
