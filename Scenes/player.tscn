@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cxvqx074c4blw"]
+[gd_scene load_steps=51 format=3 uid="uid://cxvqx074c4blw"]
 
 [ext_resource type="Script" uid="uid://dvr8yaagdrsut" path="res://scripts/Player/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cab5p060dqatg" path="res://assets/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_v0iea"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bkag8835202qb" path="res://scripts/Player/movement_states/move.gd" id="11_pu2lt"]
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/Player/movement_states/jump.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/Player/movement_states/fall.gd" id="13_ukyrk"]
+[ext_resource type="PackedScene" uid="uid://cu2qvkn3bs7c5" path="res://Scenes/ui/player_ui.tscn" id="15_h4iuc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
 atlas = ExtResource("2_3smsa")
@@ -383,6 +384,8 @@ script = SubResource("GDScript_7dp3o")
 
 [node name="attack" type="Node" parent="state_machine"]
 script = SubResource("GDScript_h4iuc")
+
+[node name="PlayerUI" parent="." instance=ExtResource("15_h4iuc")]
 
 [connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]
