@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dowd35ibbqtgg"]
+
+[ext_resource type="Script" uid="uid://fpqtcnr1fhf6" path="res://Scenes/ui/healthbar.gd" id="1_irqc5"]
+[ext_resource type="Texture2D" uid="uid://ketwj46hf0wf" path="res://assets/emptyHeart.tres" id="3_rmh2j"]
+
+[node name="Healthbar" type="CanvasLayer"]
+script = ExtResource("1_irqc5")
+
+[node name="EmptyHeart" type="TextureRect" parent="."]
+offset_left = -40.0
+offset_top = -40.0
+texture = ExtResource("3_rmh2j")
+expand_mode = 3
+
+[node name="Healthbar" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
