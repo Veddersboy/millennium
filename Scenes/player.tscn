@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cxvqx074c4blw"]
+[gd_scene load_steps=58 format=3 uid="uid://cxvqx074c4blw"]
 
 [ext_resource type="Script" uid="uid://dvr8yaagdrsut" path="res://scripts/Player/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cab5p060dqatg" path="res://assets/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_v0iea"]
@@ -15,8 +15,8 @@
 [ext_resource type="Script" uid="uid://bkag8835202qb" path="res://scripts/Player/movement_states/move.gd" id="11_pu2lt"]
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/Player/movement_states/jump.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/Player/movement_states/fall.gd" id="13_ukyrk"]
-[ext_resource type="PackedScene" uid="uid://cu2qvkn3bs7c5" path="res://Scenes/ui/player_ui.tscn" id="15_h4iuc"]
 [ext_resource type="Script" uid="uid://bm4faluiopa16" path="res://scripts/Player/combat_states/attack.gd" id="15_fd4e3"]
+[ext_resource type="PackedScene" uid="uid://cu2qvkn3bs7c5" path="res://Scenes/ui/player_ui.tscn" id="15_h4iuc"]
 [ext_resource type="Script" uid="uid://bjreejrvnvpmj" path="res://scripts/Player/combat_states/hurt.gd" id="16_igrcy"]
 [ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://scripts/Player/movement_states/dash.gd" id="16_l6n3p"]
 [ext_resource type="Script" uid="uid://b7w6cd5lko2cu" path="res://scripts/Player/HealthComponent.gd" id="16_qqcod"]

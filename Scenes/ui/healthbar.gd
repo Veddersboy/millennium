@@ -5,10 +5,6 @@ var heart := preload("res://assets/heart.tres")
 var emptyHeart := preload("res://assets/emptyHeart.tres")
 var currentHealthShown : int = 1
 
-#temp variables
-var maxHealth : int = 7
-var currentHealth : int = maxHealth - 1
-
 @onready
 var healthbar := $Healthbar
 @onready
@@ -17,9 +13,7 @@ var heartObj := $EmptyHeart
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initiate amount of maxHealth and current health according to player stats
-	loadHealth(maxHealth, currentHealth)
-	update_health(20)
-	update_maxHealth(5)
+	loadHealth(1, 1)
 	
 func loadHealth(maxHP: int, currentHP: int) -> void:
 	#Ensures no leftover children are present

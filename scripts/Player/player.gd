@@ -19,6 +19,7 @@ var input = $input_manager
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var attack_area: Area2D = $AttackArea
 @onready var hurtbox: Area2D = $Hurtbox
+@onready var playerUI : PlayerUI = $PlayerUI
 
 
 # var lastDirection := Vector2.RIGHT
@@ -54,6 +55,9 @@ func _ready() -> void:
 	state_machine.init(self)
 	
 	add_to_group("player")
+	
+	if playerUI:
+		playerUI.initUI(self)
 	
 	if health_component:
 		health_component.health_depleted.connect(_on_health_depleted)
