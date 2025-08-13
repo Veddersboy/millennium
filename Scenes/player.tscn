@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/Player/movement_states/jump.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/Player/movement_states/fall.gd" id="13_ukyrk"]
 [ext_resource type="Script" uid="uid://bm4faluiopa16" path="res://scripts/Player/combat_states/attack.gd" id="15_fd4e3"]
+[ext_resource type="PackedScene" uid="uid://cu2qvkn3bs7c5" path="res://Scenes/ui/player_ui.tscn" id="15_h4iuc"]
 [ext_resource type="Script" uid="uid://bjreejrvnvpmj" path="res://scripts/Player/combat_states/hurt.gd" id="16_igrcy"]
 [ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://scripts/Player/movement_states/dash.gd" id="16_l6n3p"]
 [ext_resource type="Script" uid="uid://b7w6cd5lko2cu" path="res://scripts/Player/HealthComponent.gd" id="16_qqcod"]
@@ -451,6 +452,8 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("RectangleShape2D_fs7ks")
+
+[node name="PlayerUI" parent="." instance=ExtResource("15_h4iuc")]
 
 [connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]
