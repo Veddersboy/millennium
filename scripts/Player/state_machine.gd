@@ -23,7 +23,6 @@ func process_input(input: Node):
 		change_state(new_state)
 
 func process_physics(delta: float):
-	pass
 	var new_state = current_state.process_physics(delta)
 	if new_state:
 		change_state(new_state)

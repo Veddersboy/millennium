@@ -1,12 +1,22 @@
 extends StateEnemy
 class_name IdleEnemy
 
+@export var friction = 1800
+
 func enter() -> void:
 	enemy.animations.play("idle")
 
-func physics_process(delta: float) -> void:
-	# Example transition logic
+func physics_process(delta: float) -> StateEnemy:
+	
+	
 	if enemy.player_chase:
-		enemy.state_machine.change_state(enemy.move_state)
+		return enemy.move_state
 	elif not enemy.is_on_floor():
-		enemy.state_machine.change_state(enemy.fall_state)
+		return enemy.fall_state
+	
+	enemy.velocity.x = move_toward(enemy.velocity.x, 0, friction * delta)
+	enemy.move_and_slide()
+	
+	return null
+	
+	
