@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://bkag8835202qb" path="res://scripts/Player/movement_states/move.gd" id="11_pu2lt"]
 [ext_resource type="Script" uid="uid://c30pektmsro0v" path="res://scripts/Player/movement_states/jump.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://crgihi45kww4h" path="res://scripts/Player/movement_states/fall.gd" id="13_ukyrk"]
-[ext_resource type="PackedScene" uid="uid://cu2qvkn3bs7c5" path="res://Scenes/ui/player_ui.tscn" id="15_h4iuc"]
 [ext_resource type="Script" uid="uid://bm4faluiopa16" path="res://scripts/Player/combat_states/attack.gd" id="15_fd4e3"]
 [ext_resource type="Script" uid="uid://bjreejrvnvpmj" path="res://scripts/Player/combat_states/hurt.gd" id="16_igrcy"]
 [ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://scripts/Player/movement_states/dash.gd" id="16_l6n3p"]
@@ -317,13 +316,14 @@ radius = 8.0
 height = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
-size = Vector2(38.0313, 27.25)
+size = Vector2(95, 68.4219)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
 scale = Vector2(2.0625, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"hurt"
@@ -331,6 +331,7 @@ frame = 2
 frame_progress = 0.988813
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_3smsa")
 
 [node name="DashTime" type="Timer" parent="."]
@@ -374,15 +375,14 @@ script = ExtResource("16_qqcod")
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_3smsa")
 
 [node name="AttackArea" type="Area2D" parent="."]
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -11.7891)
 shape = SubResource("RectangleShape2D_fs7ks")
-
-[node name="PlayerUI" parent="." instance=ExtResource("15_h4iuc")]
 
 [connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]
