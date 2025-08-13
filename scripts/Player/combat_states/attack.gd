@@ -4,7 +4,7 @@ class_name attack
 @export
 var attack_damage: float = 1.0
 @export 
-var attack_range: float = 80.0
+var attack_range: float = 45.0
 @export 
 var attack_duration: float = 0.4
 
@@ -20,10 +20,15 @@ func enter():
 	if parent.has_node("AttackArea"):
 		var attack_area = parent.get_node("AttackArea")
 		position_attack_area(attack_area)
-		attack_area.monitoring = true
+		parent.attack_area.monitoring = true
 		
 		if not attack_area.area_entered.is_connected(_on_attack_area_entered):
 			attack_area.area_entered.connect(_on_attack_area_entered)
+		
+		# Manually checking areas
+		#for overlapping_area in attack_area.get_overlapping_areas():
+			#if overlapping_area.is_in_group("enemy_hurtbox") or overlapping_area.is_in_group("enemies"):
+				#_on_attack_area_entered(overlapping_area)
 
 func exit():
 	if parent.has_node("AttackArea"):
@@ -71,7 +76,7 @@ func _on_attack_area_entered(area):
 		if area.is_in_group("enemy_hurtbox"):
 			enemy_node = area.get_parent()
 		if enemy_node.has_method("apply_damage"):
-			enemy_node.apply_damage(attack_damage)
+			enemy_node.apply_damage(attack_damage, parent.global_position)
 			print("Player dealt ", attack_damage, " damage to enemy: ", enemy_node.name)
 			has_attacked = true
 			_create_hit_effect(area.global_position)

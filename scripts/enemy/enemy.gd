@@ -4,14 +4,16 @@ class_name Enemy
 @onready var animations : AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine : EnemyStateMachine = $state_machine_enemy
 
-@onready var idle_state : IdleEnemy = $state_machine_enemy/idle
-@onready var move_state : MoveEnemy = $state_machine_enemy/move
-@onready var fall_state : FallEnemy = $state_machine_enemy/fall
+@onready var idle_state : StateEnemy = $state_machine_enemy/idle
+@onready var move_state : StateEnemy = $state_machine_enemy/move
+@onready var fall_state : StateEnemy = $state_machine_enemy/fall
+@onready var hurt_state: StateEnemy = $state_machine_enemy/hurt
 
 @onready var health_component: EnemyHealthComponent = $EnemyHealthComponent
 
+
 @export var gravity : float = 1000.0
-@export var maxSpeed : float = 100.0
+@export var maxSpeed : float = 80.0
 @export var acceleration : float = 1800.0
 @export var player_chase : bool = false
 @export var player : Node2D = null
@@ -29,9 +31,9 @@ func _ready() -> void:
 	if has_node("DamageArea"):
 		var attack_area = get_node("DamageArea")
 		attack_area.add_to_group("enemy_attacks")
-		attack_area.set_meta("damage", 1.0) # Example damage value
+		attack_area.set_meta("damage", 1.0)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float):
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
@@ -55,6 +57,12 @@ func _on_death():
 	set_physics_process(false)
 	queue_free()
 	
-func apply_damage(amount: float) -> void:
+func apply_damage(amount: float, source_position: Vector2) -> void:
+	var was_alive = health_component.current_health > 0
 	health_component.take_damage(amount)
-	print("Enemy took ", amount, " damage!")
+	if was_alive and health_component.current_health > 0:
+		print("Enemy took ", amount, " damage!")
+		var knockback_dir = (global_position - source_position).normalized()
+		hurt_state.set_knockback_direction(knockback_dir)
+		state_machine.change_state(hurt_state)
+	

@@ -244,7 +244,6 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1dp5w"]
-size = Vector2(23, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdsm3"]
 radius = 69.1809
@@ -252,15 +251,19 @@ radius = 69.1809
 [node name="enemy" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_t1ujs")
+gravity = null
+maxSpeed = null
+acceleration = null
+player_chase = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.55271e-15, 0)
+position = Vector2(6, -6.5)
 scale = Vector2(1.75, 1.8125)
 sprite_frames = SubResource("SpriteFrames_6mhbk")
-animation = &"death"
+animation = &"hurt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(6, -3)
 shape = SubResource("RectangleShape2D_1dp5w")
 
 [node name="detection_area" type="Area2D" parent="."]
@@ -268,6 +271,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+position = Vector2(6, -3)
 shape = SubResource("CircleShape2D_qdsm3")
 
 [node name="state_machine_enemy" type="Node" parent="."]
@@ -287,18 +291,17 @@ script = ExtResource("10_haro7")
 
 [node name="EnemyHealthComponent" type="Node2D" parent="."]
 script = ExtResource("8_auwsv")
-max_health = 5.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 3)
+position = Vector2(6, -3)
 shape = SubResource("RectangleShape2D_1dp5w")
 
 [node name="DamageArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
-position = Vector2(0, 3)
+position = Vector2(6, -3)
 shape = SubResource("RectangleShape2D_1dp5w")
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]

@@ -9,8 +9,8 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func physics_process(delta: float) -> void:
-	pass
+func physics_process(delta: float) -> StateEnemy:
+	return null
 
-func process(delta: float) -> void:
-	pass
+func process_frame(delta: float) -> StateEnemy:
+	return null

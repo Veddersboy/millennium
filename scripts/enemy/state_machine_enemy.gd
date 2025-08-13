@@ -11,14 +11,17 @@ func init(enemy: Enemy) -> void:
 	current_state.enter()
 
 func change_state(new_state: StateEnemy) -> void:
-	if new_state == current_state:
-		return
-	current_state.exit()
+	if current_state:
+		current_state.exit()
 	current_state = new_state
 	current_state.enter()
 
-func process_physics(delta: float) -> void:
-	current_state.physics_process(delta)
+func process_physics(delta: float):
+	var new_state = current_state.physics_process(delta)
+	if new_state:
+		change_state(new_state)
 
-func process_frame(delta: float) -> void: 
-	current_state.process(delta)
+func process_frame(delta: float):
+	var new_state = current_state.process_frame(delta)
+	if new_state:
+		change_state(new_state)
