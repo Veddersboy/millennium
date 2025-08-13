@@ -40,8 +40,10 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	player = body
-	player_chase = true
+	
+	if(body is CharacterBody2D):
+		player = body
+		player_chase = true
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body == player:
