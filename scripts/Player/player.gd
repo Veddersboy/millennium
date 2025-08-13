@@ -13,9 +13,10 @@ var input = $input_manager
 @onready var jump_state = $state_machine/jump
 @onready var fall_state = $state_machine/fall
 @onready var dash_state = $state_machine/dash
-
 @onready var attack_state = $state_machine/attack
 @onready var hurt_state = $state_machine/hurt
+@onready var death_state = $state_machine/death
+
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var attack_area: Area2D = $AttackArea
 @onready var hurtbox: Area2D = $Hurtbox
@@ -94,13 +95,13 @@ func dash_check(delta):
 func _on_health_depleted():
 	"""Called when player's health reaches 0"""
 	player_died.emit()
+	state_machine.change_state(death_state)
 	print("Player died!")
 
 func _on_took_damage(damage: float):
 	"""Called when player takes damage"""
-	print("Player took ", damage, " hearts of damage!")
-	
-	# Transition to hurt state if not already there
+	#print("Player took ", damage, " hearts of damage!")
+
 	if state_machine.current_state != hurt_state:
 		state_machine.change_state(hurt_state)
 
