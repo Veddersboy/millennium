@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @export
 var heart := preload("res://assets/heart.tres")

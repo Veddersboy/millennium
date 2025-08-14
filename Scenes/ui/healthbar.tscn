@@ -3,17 +3,23 @@
 [ext_resource type="Script" uid="uid://fpqtcnr1fhf6" path="res://Scenes/ui/healthbar.gd" id="1_irqc5"]
 [ext_resource type="Texture2D" uid="uid://ketwj46hf0wf" path="res://assets/emptyHeart.tres" id="3_rmh2j"]
 
-[node name="Healthbar" type="CanvasLayer"]
+[node name="Healthbar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_irqc5")
 
 [node name="EmptyHeart" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -40.0
 texture = ExtResource("3_rmh2j")
 expand_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Healthbar" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 theme_override_constants/separation = 3
+metadata/_edit_use_anchors_ = true

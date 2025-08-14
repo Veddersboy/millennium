@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://nmv4d5uyme3t"]
+
+[ext_resource type="Script" uid="uid://cmw76hqfyg510" path="res://Scenes/ui/energybar.gd" id="1_w30q2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lam5t"]
+bg_color = Color(0.25, 0.195, 0.2115, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyqke"]
+bg_color = Color(1, 0, 0.3, 1)
+
+[node name="Energybar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 3
+script = ExtResource("1_w30q2")
+
+[node name="Bar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 141.0
+offset_bottom = 22.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lam5t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wyqke")
+value = 50.0
