@@ -89,7 +89,6 @@ func _physics_process(delta: float) -> void:
 	dash_check(delta)
 	state_machine.process_input(input)
 	state_machine.process_physics(delta)
-	handle_burn()
 	input.reset()
 
 func _process(delta: float) -> void:
@@ -117,16 +116,14 @@ func dash_check(delta):
 		dash_CD_counter = 0
 	return
 
-func handle_burn() -> void:
-	if input.ignite_pressed:
-		print("Burn pressed")
-		for enemy in overlapping_enemies:
-			if enemy.is_dead:
-				print("Burn STATE")
-				state_machine.change_state(burnBody_state)
-				enemy.ignite()
-				input.ignite_pressed = false
-				break
+func attempt_burnBody() -> bool:
+	print("Burn pressed")
+	for enemy in overlapping_enemies:
+		if enemy.is_dead && !enemy.is_in_group("burning"):
+			enemy.add_to_group("toBurn")
+	if get_tree().get_node_count_in_group("toBurn") > 0:
+		return true
+	return false
 
 func get_overlapping_enemies() -> Array:
 	var enemies := []

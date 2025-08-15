@@ -15,8 +15,8 @@ func process_input(input: Node) -> State:
 		return parent.dash_state
 	if input.attack_pressed:
 		return parent.attack_state
-	#if input.ignite_pressed:
-		#return parent.burn_state
+	if input.ignite_pressed && parent.attempt_burnBody():
+		return parent.burnBody_state
 	return null
 
 func process_physics(delta) -> State:

@@ -69,7 +69,10 @@ func _on_death():
 	state_machine.change_state(death_state)
 
 func ignite():
+	add_to_group("burning")
+	remove_from_group("toBurn")
 	state_machine.change_state(burned_state)
+	
 	
 func apply_damage(amount: float, source_position: Vector2) -> void:
 	var was_alive = health_component.current_health > 0

@@ -308,7 +308,6 @@ script = ExtResource("12_ta2yt")
 
 [node name="EnemyHealthComponent" type="Node2D" parent="."]
 script = ExtResource("8_auwsv")
-max_health = 1.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 

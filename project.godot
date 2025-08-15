@@ -15,6 +15,11 @@ run/main_scene="uid://c3k0rv3hjcoun"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+toBurn="Entities tagged by player to Burn"
+burning="Entities actively burning by the player"
+
 [input]
 
 move_left={

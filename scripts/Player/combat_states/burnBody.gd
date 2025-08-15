@@ -8,7 +8,9 @@ var burn_energy_gain = 10
 func enter():
 	super()
 	burn_time = 0
-	#parent.animations.play("burn")
+	
+	get_tree().call_group("toBurn", "ignite")
+	
 	parent.add_energy(burn_energy_gain)
 
 func process_physics(delta) -> State:
