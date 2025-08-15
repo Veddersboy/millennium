@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://cxvqx074c4blw"]
+[gd_scene load_steps=72 format=3 uid="uid://cxvqx074c4blw"]
 
 [ext_resource type="Script" uid="uid://dvr8yaagdrsut" path="res://scripts/Player/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cab5p060dqatg" path="res://assets/herochar sprites(new)/herochar_idle_anim_strip_4.png" id="1_v0iea"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://scripts/Player/movement_states/dash.gd" id="16_l6n3p"]
 [ext_resource type="Script" uid="uid://b7w6cd5lko2cu" path="res://scripts/Player/HealthComponent.gd" id="16_qqcod"]
 [ext_resource type="Script" uid="uid://dlmhpwrxfmksb" path="res://scripts/Player/combat_states/death.gd" id="19_l6n3p"]
+[ext_resource type="Script" uid="uid://dya3p8p3anqp6" path="res://Scenes/burn.gd" id="21_2ijsl"]
+[ext_resource type="Script" uid="uid://bwf8nn4611clo" path="res://Scenes/energy_component.gd" id="22_bi64h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
 atlas = ExtResource("2_3smsa")
@@ -389,6 +391,9 @@ height = 26.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
 size = Vector2(38.0313, 27.25)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ijsl"]
+radius = 19.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
 
@@ -438,8 +443,19 @@ script = ExtResource("16_igrcy")
 [node name="death" type="Node" parent="state_machine"]
 script = ExtResource("19_l6n3p")
 
+[node name="burn" type="Node" parent="state_machine"]
+script = ExtResource("21_2ijsl")
+
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("16_qqcod")
+max_hearts = 5
+starting_hearts = 5.0
+
+[node name="EnergyComponent" type="Node2D" parent="."]
+script = ExtResource("22_bi64h")
+starting_energy = 0.0
+
+[node name="TemperatureComponent" type="Node2D" parent="."]
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
@@ -453,6 +469,11 @@ monitoring = false
 shape = SubResource("RectangleShape2D_fs7ks")
 
 [node name="PlayerUI" parent="." instance=ExtResource("15_h4iuc")]
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_2ijsl")
 
 [connection signal="timeout" from="DashTime" to="." method="_on_dash_time_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]

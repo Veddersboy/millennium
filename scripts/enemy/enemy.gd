@@ -8,15 +8,20 @@ class_name Enemy
 @onready var move_state : StateEnemy = $state_machine_enemy/move
 @onready var fall_state : StateEnemy = $state_machine_enemy/fall
 @onready var hurt_state: StateEnemy = $state_machine_enemy/hurt
+@onready var death_state : StateEnemy = $state_machine_enemy/death
+@onready var burn_state  : StateEnemy = $state_machine_enemy/burn
+@onready var interactable_state  : StateEnemy = $state_machine_enemy/interactable
 
 @onready var health_component: EnemyHealthComponent = $EnemyHealthComponent
-
 
 @export var gravity : float = 1000.0
 @export var maxSpeed : float = 80.0
 @export var acceleration : float = 1800.0
 @export var player_chase : bool = false
 @export var player : Node2D = null
+
+@export var is_dead : bool = false
+@export var player_inside : bool = false
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -40,13 +45,17 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	
 	if(body is CharacterBody2D):
+		if is_dead:
+			player_inside = true
+			return
 		player = body
 		player_chase = true
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body == player:
+		if is_dead:
+			player_inside = false
 		player = null
 		player_chase = false
 
@@ -54,10 +63,16 @@ func _on_health_changed(current_health: float, max_health: float):
 	print("Enemy health:", current_health, "/", max_health)
 
 func _on_death():
+	is_dead = true
 	print("Enemy died!")
-
 	set_physics_process(false)
-	queue_free()
+	state_machine.change_state(death_state)
+
+func ignite(player_ref: Node):
+	if is_dead:
+		print("Enemy Burn State Active!")
+		state_machine.change_state(burn_state)
+		burn_state.set_player(player_ref)
 	
 func apply_damage(amount: float, source_position: Vector2) -> void:
 	var was_alive = health_component.current_health > 0

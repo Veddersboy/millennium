@@ -13,10 +13,14 @@ func initUI(_player : CharacterBody2D) -> void:
 	healthbar.loadHealth(player.health_component.max_hearts, player.health_component.current_hearts)
 	player.health_changed.connect(_updateHealthbar)
 	player.player_died.connect(_updateOnDeath)
-	energybar.loadEnergy(100,10)
+	energybar.loadEnergy(player.energy_component.max_energy, player.energy_component.current_energy)
+	player.energy_component.energy_changed.connect(_updateEnergy)
 
 func _updateHealthbar(currentHP, maxHP ) -> void:
 	healthbar.loadHealth(maxHP, currentHP)
+
+func _updateEnergy(currentEnergy: float, maxEnergy: float) -> void:
+	energybar.loadEnergy(maxEnergy, currentEnergy)
 
 func _updateOnDeath() -> void:
 	healthbar.update_health(0)

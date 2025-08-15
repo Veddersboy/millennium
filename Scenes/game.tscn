@@ -167,7 +167,7 @@ sources/0 = SubResource("TileSetAtlasSource_1l0tm")
 script = ExtResource("1_wowpa")
 
 [node name="enemy" parent="." instance=ExtResource("1_wrm1d")]
-position = Vector2(-418, -97)
+position = Vector2(-180, -50)
 
 [node name="player" parent="." instance=ExtResource("1_ebmjs")]
 z_index = 5

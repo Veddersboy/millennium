@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b862s7l0kw2dq"]
+[gd_scene load_steps=47 format=3 uid="uid://b862s7l0kw2dq"]
 
 [ext_resource type="Script" uid="uid://beubygtxd31at" path="res://scripts/enemy/enemy.gd" id="1_t1ujs"]
 [ext_resource type="Texture2D" uid="uid://vwfx16u8idyt" path="res://assets/enemies sprites/slime/slime_death_anim_strip_6.png" id="2_haro7"]
@@ -11,14 +11,9 @@
 [ext_resource type="Script" uid="uid://bks6bkk5jtuia" path="res://scripts/enemy/fallEnemy.gd" id="7_8uf12"]
 [ext_resource type="Script" uid="uid://cv803o2ymr5i2" path="res://scripts/enemy/EnemyHealthComponent.gd" id="8_auwsv"]
 [ext_resource type="Script" uid="uid://cgpoqsowbs4h4" path="res://scripts/enemy/hurt_enemy.gd" id="10_haro7"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m4x7e"]
-atlas = ExtResource("2_haro7")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vt4ob"]
-atlas = ExtResource("2_haro7")
-region = Rect2(16, 0, 16, 16)
+[ext_resource type="Script" uid="uid://dlg6678oe45eb" path="res://scripts/enemy/deathEnemy.gd" id="11_56vhr"]
+[ext_resource type="Script" uid="uid://depl8sesn1717" path="res://scripts/enemy/burnEnemy.gd" id="12_ta2yt"]
+[ext_resource type="Script" uid="uid://ddbaiqafqvk51" path="res://Scenes/interactableEnemy.gd" id="13_m4x7e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgeoe"]
 atlas = ExtResource("2_haro7")
@@ -27,6 +22,14 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tk7xo"]
 atlas = ExtResource("2_haro7")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4x7e"]
+atlas = ExtResource("2_haro7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt4ob"]
+atlas = ExtResource("2_haro7")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_scl1n"]
 atlas = ExtResource("2_haro7")
@@ -132,6 +135,17 @@ region = Rect2(224, 0, 16, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hgeoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk7xo")
+}],
+"loop": false,
+"name": &"burn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_m4x7e")
 }, {
 "duration": 1.0,
@@ -148,8 +162,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dhkrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4x7e")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -284,9 +301,18 @@ script = ExtResource("7_8uf12")
 [node name="hurt" type="Node" parent="state_machine_enemy"]
 script = ExtResource("10_haro7")
 
+[node name="death" type="Node" parent="state_machine_enemy"]
+script = ExtResource("11_56vhr")
+
+[node name="burn" type="Node" parent="state_machine_enemy"]
+script = ExtResource("12_ta2yt")
+
+[node name="interactable" type="Node" parent="state_machine_enemy"]
+script = ExtResource("13_m4x7e")
+
 [node name="EnemyHealthComponent" type="Node2D" parent="."]
 script = ExtResource("8_auwsv")
-max_health = 5.0
+max_health = 1.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 

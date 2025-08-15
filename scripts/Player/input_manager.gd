@@ -5,6 +5,7 @@ var jump_released := false
 var jump_held := false
 var dash_pressed := false
 var attack_pressed := false
+var ignite_pressed := false
 
 var direction := Vector2.ZERO
 
@@ -19,6 +20,8 @@ func _unhandled_input(event: InputEvent):
 		dash_pressed = true
 	if event.is_action_pressed("attack"):
 		attack_pressed = true
+	if event.is_action_pressed("ignite"):
+		ignite_pressed = true
 
 func _process(_delta):
 	direction.x = Input.get_axis("move_left","move_right")
@@ -28,3 +31,4 @@ func reset():
 	jump_released = false
 	dash_pressed = false
 	attack_pressed = false
+	ignite_pressed = false
