@@ -389,7 +389,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3smsa"]
 radius = 8.0
-height = 26.0
+height = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
 size = Vector2(47, 22)
@@ -445,9 +445,10 @@ script = ExtResource("1_cvnsp")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"base_attack"
-frame_progress = 0.979398
+frame_progress = 0.242505
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_3smsa")
 
 [node name="DashTime" type="Timer" parent="."]
@@ -494,9 +495,11 @@ script = ExtResource("16_qqcod")
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_3smsa")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 position = Vector2(23.5, 4)
 monitoring = false
 script = ExtResource("22_2ijsl")
