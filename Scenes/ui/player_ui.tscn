@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu2qvkn3bs7c5"]
+[gd_scene load_steps=5 format=3 uid="uid://cu2qvkn3bs7c5"]
 
 [ext_resource type="Script" uid="uid://1mpdeb7ao26" path="res://Scenes/ui/player_ui.gd" id="1_2ncp2"]
 [ext_resource type="PackedScene" uid="uid://dowd35ibbqtgg" path="res://Scenes/ui/healthbar.tscn" id="1_rervw"]
 [ext_resource type="PackedScene" uid="uid://nmv4d5uyme3t" path="res://Scenes/ui/energybar.tscn" id="3_hx53g"]
+[ext_resource type="PackedScene" uid="uid://cl1goklnseb3d" path="res://Scenes/ui/temp_progress_bar.tscn" id="4_fl8b6"]
 
 [node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource("1_2ncp2")
@@ -14,3 +15,7 @@ offset_left = 1.0
 offset_top = 51.0
 offset_right = 1.0
 offset_bottom = 51.0
+
+[node name="TempProgressBar" parent="." instance=ExtResource("4_fl8b6")]
+offset_top = 95.0
+offset_bottom = 95.0
