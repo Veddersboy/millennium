@@ -16,8 +16,13 @@ var input = $input_manager
 @onready var attack_state = $state_machine/attack
 @onready var hurt_state = $state_machine/hurt
 @onready var death_state = $state_machine/death
+@onready var burnBody_state = $state_machine/burnBody
+
+@onready var interaction_area = $InteractArea
 
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var energy_component: EnergyComponent = $EnergyComponent
+
 @onready var attack_area: Area2D = $AttackArea
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var playerUI : PlayerUI = $PlayerUI
@@ -52,6 +57,10 @@ var has_dash : bool = true
 signal player_died
 signal health_changed(current_hearts: float, max_hearts: int)
 
+@export var enemy : Node2D = null
+@export var enemy_inside : bool = false
+@export var overlapping_enemies: Array = []
+
 func _ready() -> void:
 	state_machine.init(self)
 	
@@ -65,6 +74,11 @@ func _ready() -> void:
 		health_component.took_damage.connect(_on_took_damage)
 		health_component.health_changed.connect(_on_health_changed)
 	
+	if has_node("InteractArea"):
+		var interact_area = get_node("InteractArea")
+		interact_area.body_entered.connect(_on_interactable_body_entered)
+		interact_area.body_exited.connect(_on_interactable_body_exited)
+
 	if hurtbox:
 		hurtbox.area_entered.connect(_on_hurtbox_area_entered)
 
@@ -80,6 +94,17 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
+func _on_interactable_body_entered(body: Node) -> void:
+	print("Body entered:", body.name, "Groups:", body.get_groups())
+	if body.is_in_group("enemies") and not overlapping_enemies.has(body):
+		overlapping_enemies.append(body)
+		print("Enemy entered:", body.name)
+
+func _on_interactable_body_exited(body: Node) -> void:
+	if body.is_in_group("enemies") and overlapping_enemies.has(body):
+		overlapping_enemies.erase(body)
+		print("Enemy left:", body.name)
+
 func dash_check(delta):
 	if has_dash:
 		return
@@ -90,8 +115,23 @@ func dash_check(delta):
 		has_dash = true
 		dash_CD_counter = 0
 	return
-	
-# Can add a death state later on with everything below
+
+func attempt_burnBody() -> bool:
+	print("Burn pressed")
+	for enemy in overlapping_enemies:
+		if enemy.is_dead && !enemy.is_in_group("burning"):
+			enemy.add_to_group("toBurn")
+	if get_tree().get_node_count_in_group("toBurn") > 0:
+		return true
+	return false
+
+func get_overlapping_enemies() -> Array:
+	var enemies := []
+	for area in interaction_area.get_overlapping_bodies():
+		if area.is_in_group("enemies"):
+			enemies.append(area)
+	return enemies
+
 func _on_health_depleted():
 	"""Called when player's health reaches 0"""
 	player_died.emit()
@@ -100,7 +140,6 @@ func _on_health_depleted():
 
 func _on_took_damage(damage: float):
 	"""Called when player takes damage"""
-	#print("Player took ", damage, " hearts of damage!")
 
 	if state_machine.current_state != hurt_state:
 		state_machine.change_state(hurt_state)
@@ -119,6 +158,10 @@ func _on_hurtbox_area_entered(area):
 		var knockback_dir = (global_position - area.global_position).normalized()
 		if state_machine.current_state == hurt_state:
 			hurt_state.set_knockback_direction(knockback_dir)
+
+func add_energy(amount: float) -> void:
+	energy_component.add_energy(amount)
+	print("Player energy:", energy_component.current_energy)
 
 #var GRAVITY = 1000.0
 #
