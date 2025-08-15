@@ -41,6 +41,10 @@ region = Rect2(64, 0, 16, 16)
 atlas = ExtResource("2_3smsa")
 region = Rect2(96, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0gysh"]
 atlas = ExtResource("2_3smsa")
 region = Rect2(16, 0, 16, 16)
@@ -137,10 +141,6 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("6_fs7ks")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(16, 0, 16, 16)
@@ -211,6 +211,9 @@ animations = [{
 }, {
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_p1odr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvnsp")
 }],
 "loop": true,
 "name": &"base_attack",
@@ -389,7 +392,7 @@ radius = 8.0
 height = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs7ks"]
-size = Vector2(46, 22)
+size = Vector2(47, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ax3m3"]
 atlas = ExtResource("22_bi64h")
@@ -442,6 +445,7 @@ script = ExtResource("1_cvnsp")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"base_attack"
+frame_progress = 0.14478
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3smsa")
@@ -498,14 +502,16 @@ monitoring = false
 script = ExtResource("22_2ijsl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_fs7ks")
 
-[node name="Attack Sprites" type="AnimatedSprite2D" parent="AttackArea"]
+[node name="AttackSprites" type="AnimatedSprite2D" parent="AttackArea"]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5x828")
 animation = &"empty"
 offset = Vector2(4.25, -2)
+
+[node name="ActiveTime" type="Timer" parent="AttackArea"]
+one_shot = true
 
 [node name="PlayerUI" parent="." instance=ExtResource("15_h4iuc")]
 visible = false
