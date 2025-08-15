@@ -18,7 +18,6 @@ func enter():
 		#player_ref.add_energy(burn_energy_gain)
 
 func process_frame(delta: float) -> StateEnemy:
-	print("being called")
 	burn_timer -= delta
 	if player_ref:
 		player_ref.add_energy(burn_energy_gain * delta)
