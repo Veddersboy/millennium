@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dowd35ibbqtgg"]
+[gd_scene load_steps=4 format=3 uid="uid://dowd35ibbqtgg"]
 
 [ext_resource type="Script" uid="uid://fpqtcnr1fhf6" path="res://Scenes/ui/healthbar.gd" id="1_irqc5"]
 [ext_resource type="Texture2D" uid="uid://ketwj46hf0wf" path="res://assets/emptyHeart.tres" id="3_rmh2j"]
+[ext_resource type="Texture2D" uid="uid://bfuaj1s4xo7hf" path="res://assets/heart.tres" id="3_wn05d"]
 
 [node name="Healthbar" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchors_preset = 0
 script = ExtResource("1_irqc5")
 
 [node name="EmptyHeart" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -40.0
 offset_top = -40.0
@@ -22,4 +24,22 @@ offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 theme_override_constants/separation = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="HeartPlaceHolder1" type="TextureRect" parent="Healthbar"]
+layout_mode = 2
+texture = ExtResource("3_wn05d")
+expand_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="HeartPlaceHolder3" type="TextureRect" parent="Healthbar"]
+layout_mode = 2
+texture = ExtResource("3_wn05d")
+expand_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="HeartPlaceHolder4" type="TextureRect" parent="Healthbar"]
+layout_mode = 2
+texture = ExtResource("3_rmh2j")
+expand_mode = 3
 metadata/_edit_use_anchors_ = true

@@ -12,6 +12,7 @@ var heartObj := $EmptyHeart
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	heartObj.visible = true
 	# Initiate amount of maxHealth and current health according to player stats
 	loadHealth(1, 1)
 	
