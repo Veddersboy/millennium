@@ -6,56 +6,45 @@ var attack_damage: float = 1.0
 @export 
 var attack_range: float = 45.0
 @export 
-var attack_duration: float = 0.4
+var attackState_duration: float = 0.1 ##Shorter than 0.4s cuts the current animation
+@export
+var hitboxDuration: float = 0.2 ## Duration the hitbox will check for
+@export
+var attack_movement_multiplier = .8
 
-var attack_timer: float = 0.0
-var has_attacked: bool = false
+var _attack_timer: float = 0.0
 
 func enter():
 	super()
-	parent.animations.play("base_attack")
-	attack_timer = attack_duration
-	has_attacked = false
-	
+	_attack_timer = attackState_duration
 	if parent.has_node("AttackArea"):
 		var attack_area = parent.get_node("AttackArea")
-		position_attack_area(attack_area)
-		parent.attack_area.monitoring = true
-		
-		if not attack_area.area_entered.is_connected(_on_attack_area_entered):
-			attack_area.area_entered.connect(_on_attack_area_entered)
-		
-		# Manually checking areas
-		#for overlapping_area in attack_area.get_overlapping_areas():
-			#if overlapping_area.is_in_group("enemy_hurtbox") or overlapping_area.is_in_group("enemies"):
-				#_on_attack_area_entered(overlapping_area)
+		_position_attack_area(attack_area)
+		attack_area.play_attack("slash", attack_damage, hitboxDuration)
+		parent.animations.play("base_attack")
 
 func exit():
-	if parent.has_node("AttackArea"):
-		parent.get_node("AttackArea").monitoring = false
-
-func position_attack_area(attack_area: Area2D):
-	var facing_direction = Vector2.RIGHT
-	if parent.animations.flip_h:
-		facing_direction = Vector2.LEFT
-	
-	attack_area.position = facing_direction * (attack_range / 2)
+	pass
 
 func process_input(input: Node) -> State:
+	if input.jump_pressed && parent.is_on_floor():
+		return parent.jump_state
 	return null
 
 func process_physics(delta) -> State:
-	attack_timer -= delta
+	_attack_timer -= delta
 	
-	parent.animations.flip_h = input.direction.x == -1 if input.direction.x != 0 else parent.animations.flip_h
+	if input.direction.x != 0:
+		if (input.direction.x > 0) == parent.animations.flip_h:
+			_attack_timer = 0.0
+		parent.animations.flip_h = input.direction.x == -1 if input.direction.x != 0 else parent.animations.flip_h
 	
-	var attack_movement_multiplier = 1
 	parent.velocity.x = move_toward(parent.velocity.x, input.direction.x * parent.maxSpeed * attack_movement_multiplier, parent.acceleration * delta)
 	parent.velocity.y += parent.gravity * delta
 	
 	parent.move_and_slide()
 	
-	if attack_timer <= 0.0:
+	if _attack_timer <= 0.0:
 		if parent.is_on_floor():
 			if input.direction.x != 0 && abs(parent.velocity.x) > parent.minSpeed:
 				return parent.move_state
@@ -66,35 +55,14 @@ func process_physics(delta) -> State:
 	
 	return null
 
-func _on_attack_area_entered(area):
-	if has_attacked:
-		return
-
+func _position_attack_area(attack_area: Area2D):
+	var facing_direction = Vector2.RIGHT
+	if parent.animations.flip_h:
+		facing_direction = Vector2.LEFT
 	
-	if area.is_in_group("enemies") or area.is_in_group("enemy_hurtbox"):
-		var enemy_node = area
-		if area.is_in_group("enemy_hurtbox"):
-			enemy_node = area.get_parent()
-		if enemy_node.has_method("apply_damage"):
-			enemy_node.apply_damage(attack_damage, parent.global_position)
-			print("Player dealt ", attack_damage, " damage to enemy: ", enemy_node.name)
-			has_attacked = true
-			_create_hit_effect(area.global_position)
-
-	if area.is_in_group("enemies"):
-		if area.has_method("apply_damage"):
-			area.apply_damage(attack_damage)
-
-	has_attacked = true
-	
-	if area.is_in_group("enemy_hurtbox"):
-		print("Attack hit detected on: ", area.get_parent().name)
-		var enemy = area.get_parent()
-		if enemy.has_node("HealthComponent"):
-			enemy.get_node("HealthComponent").take_damage(attack_damage)
-			has_attacked = true
-			
-			_create_hit_effect(area.global_position)
-
-func _create_hit_effect(position: Vector2):
-	print("Hit enemy for ", attack_damage, " hearts!")
+	if sign(attack_area.position.x) != facing_direction.x:
+		attack_area.position.x = -attack_area.position.x
+		attack_area.scale.x = -attack_area.scale.x
+		# attack_area.attackSprite.flip_v = !attack_area.attackSprite.flip_v
+		
+	# attack_area.rotate_sprite_left(parent.animations.flip_h)
