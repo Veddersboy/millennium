@@ -445,7 +445,7 @@ script = ExtResource("1_cvnsp")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"base_attack"
-frame_progress = 0.14478
+frame_progress = 0.919801
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3smsa")

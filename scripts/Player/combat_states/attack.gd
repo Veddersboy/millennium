@@ -34,7 +34,10 @@ func process_input(input: Node) -> State:
 func process_physics(delta) -> State:
 	_attack_timer -= delta
 	
-	parent.animations.flip_h = input.direction.x == -1 if input.direction.x != 0 else parent.animations.flip_h
+	if input.direction.x != 0:
+		if (input.direction.x > 0) == parent.animations.flip_h:
+			_attack_timer = 0.0
+		parent.animations.flip_h = input.direction.x == -1 if input.direction.x != 0 else parent.animations.flip_h
 	
 	parent.velocity.x = move_toward(parent.velocity.x, input.direction.x * parent.maxSpeed * attack_movement_multiplier, parent.acceleration * delta)
 	parent.velocity.y += parent.gravity * delta
