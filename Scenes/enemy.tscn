@@ -252,6 +252,7 @@ radius = 69.1809
 [node name="enemy" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_t1ujs")
+maxSpeed = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.55271e-15, 0)
@@ -286,7 +287,7 @@ script = ExtResource("10_haro7")
 
 [node name="EnemyHealthComponent" type="Node2D" parent="."]
 script = ExtResource("8_auwsv")
-max_health = 5.0
+max_health = 9999.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
