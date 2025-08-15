@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://b7f44ti6twxoo" path="res://scripts/Player/movement_states/dash.gd" id="16_l6n3p"]
 [ext_resource type="Script" uid="uid://b7w6cd5lko2cu" path="res://scripts/Player/HealthComponent.gd" id="16_qqcod"]
 [ext_resource type="Script" uid="uid://dlmhpwrxfmksb" path="res://scripts/Player/combat_states/death.gd" id="19_l6n3p"]
-[ext_resource type="Script" uid="uid://dya3p8p3anqp6" path="res://scripts/Player/combat_states/burn.gd" id="21_2ijsl"]
+[ext_resource type="Script" uid="uid://dya3p8p3anqp6" path="res://scripts/Player/combat_states/burnBody.gd" id="21_2ijsl"]
 [ext_resource type="Script" uid="uid://bwf8nn4611clo" path="res://Scenes/energy_component.gd" id="22_bi64h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
@@ -443,7 +443,7 @@ script = ExtResource("16_igrcy")
 [node name="death" type="Node" parent="state_machine"]
 script = ExtResource("19_l6n3p")
 
-[node name="burn" type="Node" parent="state_machine"]
+[node name="burnBody" type="Node" parent="state_machine"]
 script = ExtResource("21_2ijsl")
 
 [node name="HealthComponent" type="Node2D" parent="."]

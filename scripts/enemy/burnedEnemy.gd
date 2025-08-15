@@ -1,5 +1,5 @@
 extends StateEnemy
-class_name BurnEnemy
+class_name BurnedEnemy
 
 @export var burn_duration: float = 2.0
 @export var burn_energy_gain: float = 5

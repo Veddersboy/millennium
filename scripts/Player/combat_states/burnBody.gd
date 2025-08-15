@@ -1,5 +1,5 @@
 extends State
-class_name Burn
+class_name BurnBody
 
 var burn_time: float = 0
 @export var burn_duration: float = 0.5

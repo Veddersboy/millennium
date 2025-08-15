@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://cv803o2ymr5i2" path="res://scripts/enemy/EnemyHealthComponent.gd" id="8_auwsv"]
 [ext_resource type="Script" uid="uid://cgpoqsowbs4h4" path="res://scripts/enemy/hurt_enemy.gd" id="10_haro7"]
 [ext_resource type="Script" uid="uid://dlg6678oe45eb" path="res://scripts/enemy/deathEnemy.gd" id="11_56vhr"]
-[ext_resource type="Script" uid="uid://depl8sesn1717" path="res://scripts/enemy/burnEnemy.gd" id="12_ta2yt"]
+[ext_resource type="Script" uid="uid://depl8sesn1717" path="res://scripts/enemy/burnedEnemy.gd" id="12_ta2yt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgeoe"]
 atlas = ExtResource("2_haro7")
@@ -303,7 +303,7 @@ script = ExtResource("10_haro7")
 [node name="death" type="Node" parent="state_machine_enemy"]
 script = ExtResource("11_56vhr")
 
-[node name="burn" type="Node" parent="state_machine_enemy"]
+[node name="burned" type="Node" parent="state_machine_enemy"]
 script = ExtResource("12_ta2yt")
 
 [node name="EnemyHealthComponent" type="Node2D" parent="."]

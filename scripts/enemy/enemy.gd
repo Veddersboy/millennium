@@ -9,7 +9,7 @@ class_name Enemy
 @onready var fall_state : StateEnemy = $state_machine_enemy/fall
 @onready var hurt_state: StateEnemy = $state_machine_enemy/hurt
 @onready var death_state : StateEnemy = $state_machine_enemy/death
-@onready var burn_state  : StateEnemy = $state_machine_enemy/burn
+@onready var burned_state  : StateEnemy = $state_machine_enemy/burned
 @onready var interactable_state  : StateEnemy = $state_machine_enemy/interactable
 
 @onready var health_component: EnemyHealthComponent = $EnemyHealthComponent
@@ -71,8 +71,8 @@ func _on_death():
 func ignite(player_ref: Node):
 	if is_dead:
 		print("Enemy Burn State Active!")
-		state_machine.change_state(burn_state)
-		burn_state.set_player(player_ref)
+		state_machine.change_state(burned_state)
+		burned_state.set_player(player_ref)
 	
 func apply_damage(amount: float, source_position: Vector2) -> void:
 	var was_alive = health_component.current_health > 0

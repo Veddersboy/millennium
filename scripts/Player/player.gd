@@ -16,7 +16,7 @@ var input = $input_manager
 @onready var attack_state = $state_machine/attack
 @onready var hurt_state = $state_machine/hurt
 @onready var death_state = $state_machine/death
-@onready var burn_state = $state_machine/burn
+@onready var burnBody_state = $state_machine/burnBody
 
 @onready var interaction_area = $InteractArea
 
@@ -123,7 +123,7 @@ func handle_burn() -> void:
 		for enemy in overlapping_enemies:
 			if enemy.is_dead:
 				print("Burn STATE")
-				state_machine.change_state(burn_state)
+				state_machine.change_state(burnBody_state)
 				enemy.ignite(self)
 				input.ignite_pressed = false
 				break
