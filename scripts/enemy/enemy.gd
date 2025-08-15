@@ -68,11 +68,8 @@ func _on_death():
 	set_physics_process(false)
 	state_machine.change_state(death_state)
 
-func ignite(player_ref: Node):
-	if is_dead:
-		print("Enemy Burn State Active!")
-		state_machine.change_state(burned_state)
-		burned_state.set_player(player_ref)
+func ignite():
+	state_machine.change_state(burned_state)
 	
 func apply_damage(amount: float, source_position: Vector2) -> void:
 	var was_alive = health_component.current_health > 0

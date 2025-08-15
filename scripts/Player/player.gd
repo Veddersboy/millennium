@@ -124,7 +124,7 @@ func handle_burn() -> void:
 			if enemy.is_dead:
 				print("Burn STATE")
 				state_machine.change_state(burnBody_state)
-				enemy.ignite(self)
+				enemy.ignite()
 				input.ignite_pressed = false
 				break
 

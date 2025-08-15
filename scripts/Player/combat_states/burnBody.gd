@@ -2,12 +2,14 @@ extends State
 class_name BurnBody
 
 var burn_time: float = 0
+var burn_energy_gain = 10
 @export var burn_duration: float = 0.5
 
 func enter():
 	super()
 	burn_time = 0
 	#parent.animations.play("burn")
+	parent.add_energy(burn_energy_gain)
 
 func process_physics(delta) -> State:
 	burn_time += delta
