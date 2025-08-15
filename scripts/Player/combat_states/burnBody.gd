@@ -9,9 +9,10 @@ func enter():
 	super()
 	burn_time = 0
 	
+	var totalEnergyGain = burn_energy_gain * get_tree().get_node_count_in_group("toBurn")
+	parent.add_energy(totalEnergyGain)
 	get_tree().call_group("toBurn", "ignite")
 	
-	parent.add_energy(burn_energy_gain)
 
 func process_physics(delta) -> State:
 	burn_time += delta
